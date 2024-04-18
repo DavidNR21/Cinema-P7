@@ -1,0 +1,61 @@
+
+.home {
+    background-color: var(--soft-gray);
+    height: 100%;
+}
+
+
+.container-dias {
+    /*margin-top: 85px;*/
+    padding-block: 85px;
+    width: 70%;
+}
+
+.subtitle {
+    margin-left: 10px;
+    font-size: 1rem;
+}
+
+hr {
+    margin: 5px 10px 0;
+    border: none;
+    border-top: 1px solid #050505;
+    min-width: 550px;
+}
+
+.diasContainer {
+    display: flex;
+    justify-content: space-between;
+    width: 70%;
+}
+
+.numero-dia {
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+span {
+    font-size: .8rem;
+}
+  
+.dia {
+    border: 1px solid #2f2f2f;
+    border-radius: 3px;
+    margin-top: 10px;
+    margin-left: 10px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 70px;
+    min-width: 70px;
+}
+  
+.dia:hover {
+    background-color: #f0f0f0;
+}
+  
+.selected {
+    background-color: var(--red);
+    color: #fff;
+}

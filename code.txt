@@ -1,0 +1,186 @@
+import React from 'react';
+import { Link } from 'react-router-dom'; // Importe o Link do react-router-dom
+import './Header.css'; // Importe o arquivo CSS
+
+function Header() {
+  return (
+    <header className="header">
+      <Link to="/" className="logo">Cloud Filmes</Link>
+
+      <input type="checkbox" id="check" />
+      <label htmlFor="check" className="icons">
+        <i className='bx bx-menu' id="menu-icon"></i>
+        <i className='bx bx-x' id="close-icon"></i>
+      </label>
+
+      <nav className="navbar">
+        <Link to="/search">Search</Link>
+        <Link to="/filmes">Filmes</Link>
+        <Link to="/series">Series</Link>
+        <Link to="/animes">Animes</Link>
+      </nav>
+    </header>
+  );
+}
+
+export default Header;
+
+
+
+
+
+
+
+//import { useState } from 'react'
+import { Link } from 'react-router-dom'
+import './Header.css'
+
+
+function Header(){
+
+    return (
+        <header className="header" >
+            <span>Cinema Ticket</span>
+            <nav className = "navbar">
+                <Link to = "/" >Filmes</Link>
+                <Link to = "/Salas">Salas</Link>
+                <Link to = "/Login">Login</Link>
+                <Link to = "/Cadastro">Registrar</Link>
+            </nav>
+
+            <input type="checkbox" id="check" />
+            <label htmlFor="check" className="icons">
+                <i className='bx bx-menu' id="menu-icon"></i>
+                <i className='bx bx-x' id="close-icon"></i>
+            </label>
+        </header>
+    )
+}
+
+
+export default Header
+
+
+
+
+//////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+.container {
+    margin-top: 80px;
+    width: 45%;
+}
+  
+.diasContainer {
+    margin-left: 5px;
+    display: flex;
+    justify-content:space-between;
+}
+  
+.dia {
+    border: 1px solid #ccc;
+    margin-right: 10px;
+    padding: 10px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100px;
+    height: 90px;
+}
+  
+.dia:hover {
+    background-color: #f0f0f0;
+}
+  
+.selected {
+    background-color: #50125D;
+    color: #fff;
+}
+
+  
+.sub {
+    margin-left: 10;
+}
+
+
+
+<div className="container">
+                    <h2 className="sub">Escolha um dia para assistir um filme</h2>
+                    <div className="diasContainer">
+                        {diasSemana.map((dia, index) => (
+                            <div
+                                key={index}
+                                className={`dia ${selectedDay === index ? 'selected' : ''}`}
+                                onClick={() => handleDayClick(index)}
+                            >
+                                <span>{dia}</span>
+                                <span>{index + 1}</span>
+                                <span>Abr</span>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
+
+
+/////////////////////////////////////////////////////////
+
+
+
+
+
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+}
+  
+.form-group {
+    margin-bottom: 1rem;
+    margin-left: 5px;
+    margin-right: 5px;
+    border: 1px solid blue;
+}
+  
+label {
+    display: block;
+    font-weight: bold;
+}
+  
+input[type='text'],
+input[type='email'],
+input[type='password'],
+input[type='date'],
+input[type='checkbox'] {
+    width: 50%;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+  
+button {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 5px;
+}
+  
+button:hover {
+    background-color: #0056b3;
+}
+  
+
+
+
+
+
+

@@ -1,0 +1,15 @@
+
+.card {
+    width: 50%;
+}
+
+.imagem-div {
+    width: 200px;
+    height: 200px;
+}
+
+.banner {
+    margin-left: 20px;
+    background-color: var(--gray);
+    height: 250px;
+}
