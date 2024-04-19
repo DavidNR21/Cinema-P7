@@ -1,17 +1,20 @@
 
-import Header from "../../components/Header/Header";
+import './styles.css'; // Arquivo de estilos CSS
+import Header from '../../components/Header/Header';
+import CardSalas from '../../components/CardSalas/CardSalas';
 
+const Salas = () => {
+    // Array de salas de cinema (simulado)
 
-function Salas (){
-    return(
+    return (
         <>
             <Header />
-            <h2>
-                Salas
-            </h2>
+            <h2 className="salas-title">Salas Disponíveis</h2>
+            <div className="salas-container">
+                <CardSalas />
+            </div>
         </>
-    )
+    );
 }
 
-
-export default Salas
+export default Salas;

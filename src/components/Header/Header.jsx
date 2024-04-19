@@ -2,6 +2,8 @@ import { Link } from 'react-router-dom'; // Importe o Link do react-router-dom
 import './Header.css'; // Importe o arquivo CSS
 
 function Header() {
+
+  
   return (
     <header className="header">
       <span className="logo">Cinema Ticket</span>

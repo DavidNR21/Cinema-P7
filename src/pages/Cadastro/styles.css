@@ -23,14 +23,14 @@
     font-size: 1rem;
     border: 1px solid #ccc;
     border-radius: 4px;
-    box-sizing: border-box; /* Adicionado para garantir que o padding não aumente a largura total */
+    box-sizing: border-box;
   }
   
   button {
     display: block;
     width: 100%;
     padding: 0.5rem 1rem;
-    margin-top: 1rem; /* Adicionado espaçamento entre o último campo e o botão */
+    margin-top: 1rem;
     font-size: 1rem;
     background-color: var(--primary); /*#007bff;*/
     color: #fff;
