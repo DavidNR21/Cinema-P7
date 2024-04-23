@@ -3,6 +3,7 @@ import Home from "../pages/Home/Home"
 import Cadastro from "../pages/Cadastro/Cadastro"
 import Login from "../pages/Login/Login"
 import Salas from "../pages/Salas/Salas"
+import Perfil from "../pages/Perfil/Perfil"
 
 
 function AppRoutes() {
@@ -13,6 +14,7 @@ function AppRoutes() {
                 <Route path="/Salas" element = { <Salas /> } />
                 <Route path="/Login" element = { <Login /> } />
                 <Route path="/Cadastro" element = { <Cadastro /> } />
+                <Route path="/perfil" element = { <Perfil /> } />
             </Routes>
         </BrowserRouter>
     )

@@ -422,4 +422,34 @@ export default CardSalas;
 }
 
 
+/////////////////////////////////////////////////////////////////////
+
+
+const salas = [
+        {
+            id: 1,
+            nome: 'Sala 1',
+            foto: 'https://ogimg.infoglobo.com.br/in/24308772-36d-ad0/FT1086A/86856180_RSSala-de-cinema-do-Kinoplex-Platinum-Rio-Sul-com-cadeiras-que-deitamFoto-Divulgacao-1.jpg',
+            lugares: 40,
+            tipo: '2D',
+            lugaresReservados: [1, 2, 3, 10]
+        },
+        {
+            id: 2,
+            nome: 'Sala 2',
+            foto: 'https://ogimg.infoglobo.com.br/in/24308772-36d-ad0/FT1086A/86856180_RSSala-de-cinema-do-Kinoplex-Platinum-Rio-Sul-com-cadeiras-que-deitamFoto-Divulgacao-1.jpg',
+            lugares: 48,
+            tipo: '3D',
+            lugaresReservados: [1, 2, 3, 10]
+        },
+        {
+            id: 3,
+            nome: 'Sala 3',
+            foto: 'https://veja.abril.com.br/wp-content/uploads/2016/10/cinema1.jpg?quality=90&strip=info&w=720&h=440&crop=1',
+            lugares: 56,
+            tipo: 'IMAX',
+            lugaresReservados: [1, 2, 3, 10]
+        }
+    ];
+
 

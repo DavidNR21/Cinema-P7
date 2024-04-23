@@ -10,9 +10,13 @@ const Login = () => {
     const { setEmailUsuario } = useContext(CinemaContext)
 
     const [email, setEmail] = useState('');
+    const [userData, setUserData] = useState({})
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
 
+    const saveUserData = (u) => {
+        localStorage.setItem('userData', JSON.stringify(u));
+    };
 
     const fetchLogin = async (dados) => {
         try {
@@ -51,13 +55,17 @@ const Login = () => {
         try {
             const response = await fetchLogin(formData);
             if (response.success == 200){
-                console.log('Usuário Logado com sucesso:', response.data);
+                setUserData(response.data)
                 setTimeout(() => {
                     setLoading(false)
-                }, 4000);
+                }, 2000);
 
                 toast.success('Usuário Logado com sucesso!');
+                
                 setEmailUsuario(response.data.email)
+                saveUserData(response.data)
+
+                console.log('Usuário Logado com sucesso:', userData);
             }
             else{
                 toast.error('Erro ao Logar usuário');

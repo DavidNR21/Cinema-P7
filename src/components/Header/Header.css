@@ -46,6 +46,14 @@
     cursor: pointer;
     display: none;
   }
+
+  #log {
+    /*border: 1px solid red;*/
+    font-size: 2rem;
+    color: #fff;
+    cursor: pointer;
+    margin-left: 60px;
+  }
   
   /* breakpoints */
   
@@ -112,6 +120,10 @@
 
 .navbar a:hover {
   color: var(--red); /* Adicione sua cor de destaque desejada */
+}
+
+#log:hover {
+  color: var(--red);
 }
 
 
