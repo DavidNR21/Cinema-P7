@@ -67,22 +67,4 @@ class Reservas(BaseModel):
 
 db.connect()
 db.create_tables([Usuarios, Filmes, Salas, Reservas])
-
-
-atributos = {
-    "dub_leg": "DUB",
-    "duracao": "2h 18m",
-    "horarios": "19:00",
-    "imagem": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcT1wJblWO1WGI4xTI7s5rzmTqgA4tNCMz5WMw1jvxl0JpA-JN8I",
-    "nome_filme": "O Preço do Amanhã",
-    "preco_ingresso": 15.0,
-    "sala": 1  # Adicione a sala aqui
-}
-
-#f1 = Filmes(**atributos)
-#f1.save()
-
-#r1 = Reservas(usuario = 1, sala = 1, filme = 1, ingressos = 1, horario = '19:00', cadeiras = '[18,19,20]')
-#r1.save()
-
 db.close()

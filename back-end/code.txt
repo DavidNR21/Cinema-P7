@@ -1,0 +1,48 @@
+data = {
+    "nome": "Fulano",
+    "email": "fulano@gmail.com",
+    "cpf": "19:00",
+    "senha": "123456",
+    "celular": "(996273998)",
+    "sexo": "masculino"  # Adicione a sala aqui
+    "nascimento" : "19-10-2024",
+    "isAdin" : false
+}
+
+user = Usuario(**data)
+user.save()
+
+data_sala = {
+    "nome_sala": "Sala 1",
+    "img_sala": "https://ogimg.infoglobo.com.br/in/24308772-36d-ad0/FT1086A/86856180_RSSala-de-cinema-do-Kinoplex-Platinum-Rio-Sul-com-cadeiras-que-deitamFoto-Divulgacao-1.jpg",
+    "tipo": "2D",
+    "quantidade_de_lugares": "48"
+}
+
+s1 = Sala(**data_sala)
+s1.save()
+
+data_sala2 = {
+    "nome_sala": "Sala 2",
+    "img_sala": "https://ogimg.infoglobo.com.br/in/24308772-36d-ad0/FT1086A/86856180_RSSala-de-cinema-do-Kinoplex-Platinum-Rio-Sul-com-cadeiras-que-deitamFoto-Divulgacao-1.jpg",
+    "tipo": "3D",
+    "quantidade_de_lugares": "56"
+}
+s2 = Sala(**data_sala2)
+s2.save()
+
+atributos = {
+    "dub_leg": "DUB",
+    "duracao": "2h 18m",
+    "horarios": "19:00",
+    "imagem": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcT1wJblWO1WGI4xTI7s5rzmTqgA4tNCMz5WMw1jvxl0JpA-JN8I",
+    "nome_filme": "O Preço do Amanhã",
+    "preco_ingresso": 15.0,
+    "sala": 1  # Adicione a sala aqui
+}
+
+f1 = Filmes(**atributos)
+f1.save()
+
+r1 = Reservas(usuario = 1, sala = 1, filme = 1, ingressos = 1, horario = '19:00', cadeiras = '[18,19,20]')
+r1.save()
