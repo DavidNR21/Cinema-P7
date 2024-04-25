@@ -67,4 +67,7 @@ class Reservas(BaseModel):
 
 db.connect()
 db.create_tables([Usuarios, Filmes, Salas, Reservas])
+
+
+
 db.close()

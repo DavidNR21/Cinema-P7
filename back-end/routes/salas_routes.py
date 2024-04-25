@@ -41,7 +41,7 @@ def createSala():
     
 
 @sala_bp.route('/', methods=['GET'])  # usando para pegar as salas e se possui lugares
-def getSlas():
+def getSalas():
     try:
         
         salas = Salas.select()
