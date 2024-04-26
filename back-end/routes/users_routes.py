@@ -1,5 +1,6 @@
 from flask import Blueprint, request, jsonify
 from models.esquema import *
+import bcrypt
 import json
 
 
@@ -19,11 +20,13 @@ def addUser():
         telefone = data['celular']
         nascimento = data['nascimento']
 
+        senha_criptografada = bcrypt.hashpw(senha.encode('utf-8'), bcrypt.gensalt())
+
         user = Usuarios(
             nome = nome,
             email = email,
             cpf = cpf,
-            senha = senha,
+            senha = senha_criptografada,
             celular = telefone,
             sexo = sexo,
             nascimento = nascimento,
@@ -139,23 +142,29 @@ def login():
 
         if not email or not senha:
             raise ValueError("Credenciais incompletas")
+            
         
-        
-        query = Usuarios.select().where(Usuarios.email == email, Usuarios.senha == senha)
+        query = Usuarios.select().where(Usuarios.email == email)
         user = query.first()
-        user_json = user.to_json()
+        
+        user_json = json.loads(user.to_json())
 
-        response = {
-            "message": f"Login feito com sucesso.",
-            "data": json.loads(user_json),
-            "success" : 200
-        }
+        senha_obtida = user_json['senha']
 
-        if senha != user.senha and email != user.email:
-            return jsonify('Credenciais Invalidas'), 500
+        if bcrypt.checkpw(senha.encode('utf-8'), senha_obtida.encode('utf-8')):
+
+            user_json['senha'] = senha
+
+            response = {
+                "message": f"Login feito com sucesso.",
+                "data": user_json,
+                "success" : True
+            }
+
+            return jsonify(response), 200
         
         else:
-            return jsonify(response), 200
+            return jsonify("Credenciais invalidas"), 500
 
 
     except Exception as e:

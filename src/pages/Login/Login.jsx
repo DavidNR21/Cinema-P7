@@ -54,7 +54,7 @@ const Login = () => {
 
         try {
             const response = await fetchLogin(formData);
-            if (response.success == 200){
+            if (response.success == true){
                 setUserData(response.data)
                 setTimeout(() => {
                     setLoading(false)
