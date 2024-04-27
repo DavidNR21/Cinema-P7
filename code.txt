@@ -348,6 +348,8 @@ export default CardSalas;
 
 /*============================================*/
 
+git checkout develop
+git merge feature_screen_filme
 
 /* Estilos para o modal */
 .modal-overlay {

@@ -1,10 +1,7 @@
 .filmes-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(440px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
     gap: 20px;
-    margin-left: 5px;
-    margin-right: 5px;
-    margin-bottom: 5px;
 }
   
 .filme-card {
@@ -13,11 +10,14 @@
     display: flex;
     flex-direction: row;
     border-radius: 8px;
+    margin-left: 8px;
+    margin-right: 8px;
+    margin-bottom: 5px;
     /*border: 1px solid green;*/
 }
   
 .filme-imagem {
-    width: 200px;
+    width: 150px;
     height: 100%;
     object-fit: cover;
     border-top-left-radius: 8px;
@@ -26,8 +26,7 @@
   
 .filme-info {
     padding: 20px;
-    width: calc(100% - 200px); /* Ajuste para ocupar o restante do espaço */
-    /*border: 1px solid red;*/
+    width: calc(100% - 150px); /* Ajuste para ocupar o restante do espaço */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -53,7 +52,7 @@
 .ingresso-div {
     background-color: #007bff;
     color: #fff;
-    width: 150px;
+    width: 200px;
     display: flex;
     justify-content: center;
     padding: 10px 20px;
@@ -63,8 +62,59 @@
 
 
 /* breakpoints */
-@media (max-width : 467px) {
+@media (max-width : 419px) {
+
+    .filmes-container{
+        width: 100%;
+    }
+
     .filme-card {
-        height: 400px;
+        height: 465px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: #f1f1f1;
+    }
+
+    .filme-imagem {
+        width: 185px;
+        height: 230px;
+        object-fit: contain;
+        border-top-left-radius: 0px;
+        border-bottom-left-radius: 0px;
+    }
+
+    .filme-info {
+        width: 100%; /* Ajuste para ocupar o restante do espaço */
+        height: 235px;
+        display: flex;
+        flex-direction: column;
+    }
+      
+    .filme-titulo {
+        font-size: 1.2rem;
+    }
+      
+    .filme-detalhes {
+        font-size: 1rem;
+        margin-bottom: 5px;
+        font-weight: 500;
+    }
+    
+    .titulo-div {
+        width: 100%;
+        display: flex;
+        justify-content: flex-start;
+    }
+    
+    .ingresso-div {
+        background-color: #007bff;
+        color: #fff;
+        width: 250px;
+        display: flex;
+        justify-content: center;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
     }
 }

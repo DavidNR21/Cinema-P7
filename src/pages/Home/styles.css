@@ -1,10 +1,43 @@
 
 .home {
-    /*background-color: var(--soft-gray);*/
     height: 100%;
 }
 
 
 .filme-div{
+    margin-top: 17px;
+}
+
+
+.dropdown {
     margin-top: 95px;
+    max-width: 600px;
+    margin-left: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    /*border: 1px solid blue;*/
+}
+
+.drop-div {
+    /*border: 1px solid green;*/
+    width: 45%;
+}
+
+.drop {
+    color: var(--terceary);
+    font-size: 1.05rem;
+}
+
+
+@media (max-width : 498px) {
+    .dropdown {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 90px;
+    }
+    .drop-div {
+        width: auto;
+    }
 }
