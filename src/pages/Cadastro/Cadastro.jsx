@@ -6,20 +6,24 @@ import './styles.css';
 
 
 function Cadastro() {
+  
+  const { count, incrementCount } = useContext(CinemaContext)
+  const [nome, setNome] = useState('');
+  const [email, setEmail] = useState('');
+  const [cpf, setCpf] = useState('');
+  const [senha, setSenha] = useState('');
+  const [celular, setCelular] = useState('');
+  const [sexo, setSexo] = useState('');
+  const [nascimento, setNascimento] = useState('');
 
-    const { count, incrementCount } = useContext(CinemaContext)
-
-
-    const [nome, setNome] = useState('');
-    const [email, setEmail] = useState('');
-    const [cpf, setCpf] = useState('');
-    const [senha, setSenha] = useState('');
-    const [celular, setCelular] = useState('');
-    const [sexo, setSexo] = useState('');
-    const [nascimento, setNascimento] = useState('');
 
   const fetchUsuario = async (dados) => {
-    try {
+
+    if (senha.length < 6){
+      toast.error('senha deve possuir mais de 6 caracteres');
+    }
+    else{
+      try {
         const response = await fetch('http://127.0.0.1:5000/user/add', {
             method: 'POST',
             headers: {
@@ -52,8 +56,10 @@ function Cadastro() {
         toast.error('Erro ao cadastrar usuário');
 
         throw error;
+      }
     }
-    };
+  };
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();

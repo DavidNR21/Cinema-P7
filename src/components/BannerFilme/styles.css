@@ -1,15 +1,120 @@
-
-.card {
-    width: 50%;
+.filmes-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 20px;
+}
+  
+.filme-card {
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: row;
+    border-radius: 8px;
+    margin-left: 8px;
+    margin-right: 8px;
+    margin-bottom: 5px;
+    /*border: 1px solid green;*/
+}
+  
+.filme-imagem {
+    width: 150px;
+    height: 100%;
+    object-fit: cover;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+  
+.filme-info {
+    padding: 20px;
+    width: calc(100% - 150px); /* Ajuste para ocupar o restante do espaço */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+  
+.filme-titulo {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+  
+.filme-detalhes {
+    font-size: 1rem;
+    margin-bottom: 5px;
+    font-weight: 500;
 }
 
-.imagem-div {
+.titulo-div {
+    /*border: 1px solid blue;*/
+    display: flex;
+    justify-content: center;
+}
+
+.ingresso-div {
+    background-color: #007bff;
+    color: #fff;
     width: 200px;
-    height: 200px;
+    display: flex;
+    justify-content: center;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
-.banner {
-    margin-left: 20px;
-    background-color: var(--gray);
-    height: 250px;
+
+/* breakpoints */
+@media (max-width : 419px) {
+
+    .filmes-container{
+        width: 100%;
+    }
+
+    .filme-card {
+        height: 465px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: #f1f1f1;
+    }
+
+    .filme-imagem {
+        width: 185px;
+        height: 230px;
+        object-fit: contain;
+        border-top-left-radius: 0px;
+        border-bottom-left-radius: 0px;
+    }
+
+    .filme-info {
+        width: 100%; /* Ajuste para ocupar o restante do espaço */
+        height: 235px;
+        display: flex;
+        flex-direction: column;
+    }
+      
+    .filme-titulo {
+        font-size: 1.2rem;
+    }
+      
+    .filme-detalhes {
+        font-size: 1rem;
+        margin-bottom: 5px;
+        font-weight: 500;
+    }
+    
+    .titulo-div {
+        width: 100%;
+        display: flex;
+        justify-content: flex-start;
+    }
+    
+    .ingresso-div {
+        background-color: #007bff;
+        color: #fff;
+        width: 250px;
+        display: flex;
+        justify-content: center;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
 }

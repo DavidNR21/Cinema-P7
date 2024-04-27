@@ -1,61 +1,43 @@
 
 .home {
-    /*background-color: var(--soft-gray);*/
     height: 100%;
 }
 
 
-.container-dias {
-    /*margin-top: 85px;*/
-    padding-block: 85px;
-    width: 70%;
+.filme-div{
+    margin-top: 17px;
 }
 
-.subtitle {
+
+.dropdown {
+    margin-top: 95px;
+    max-width: 600px;
     margin-left: 10px;
-    font-size: 1rem;
-}
-
-hr {
-    margin: 5px 10px 0;
-    border: none;
-    border-top: 1px solid #050505;
-    min-width: 550px;
-}
-
-.diasContainer {
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
-    width: 70%;
+    /*border: 1px solid blue;*/
 }
 
-.numero-dia {
-    font-size: 1.5rem;
-    font-weight: 500;
+.drop-div {
+    /*border: 1px solid green;*/
+    width: 45%;
 }
 
-span {
-    font-size: .8rem;
+.drop {
+    color: var(--terceary);
+    font-size: 1.05rem;
 }
-  
-.dia {
-    border: 1px solid #2f2f2f;
-    border-radius: 3px;
-    margin-top: 10px;
-    margin-left: 10px;
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-height: 70px;
-    min-width: 70px;
-}
-  
-.dia:hover {
-    background-color: #f0f0f0;
-}
-  
-.selected {
-    background-color: var(--red);
-    color: #fff;
+
+
+@media (max-width : 498px) {
+    .dropdown {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 90px;
+    }
+    .drop-div {
+        width: auto;
+    }
 }

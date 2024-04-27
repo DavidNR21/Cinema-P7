@@ -3,51 +3,43 @@ import { useEffect, useState, useContext } from "react";
 import Header from "../../components/Header/Header";
 import Filme from "../../components/BannerFilme/Filme";
 import { CinemaContext } from '../../context/CinemaContext';
+import Select from "react-dropdown-select";
 import './styles.css'
 
 
 function Home (){
 
     const { count, emailUsuario } = useContext(CinemaContext)
+    const [value, setValue] = useState([])
 
-    const diasSemana = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
-
-    const [selectedDay, setSelectedDay] = useState(0);
-
-    const handleDayClick = (day) => {
-        setSelectedDay(day);
-        console.log(count, 'aqui count')
-        console.log(emailUsuario)
-    };
-
-    useEffect(() => {
-        console.log(selectedDay)
-    }, [selectedDay])
-
+    const ar = [{id: 1, nome : "teste1"}, {id: 2, nome : "test2"} ,{id: 3, nome : "teste3"}]
 
     return(
         <div className="home">
             <Header />
-            <div className="container-dias">
-                <h3 className="subtitle">
-                    ESCOLHA UMA DATA PARA ASSISTIR UM FILME:
-                </h3>
-                <hr></hr>
-                <div className="diasContainer">
-                    {diasSemana.map((dia, index) => (
-                        <div
-                            key={index}
-                            className={`dia ${selectedDay === index ? 'selected' : ''}`}
-                            onClick={() => handleDayClick(index)}
-                        >
-                            <span>{dia}</span>
-                            <span className="numero-dia">{index + 10}</span>
-                            <span>Abr</span>
-                        </div>
-                    ))}
+            <div className="dropdown">
+                <div className="drop-div">
+                    <Select placeholder="Selecione uma cidade"
+                        options={ar}
+                        labelField="nome"
+                        valueField="id"
+                        className="drop"
+                        onChange={e => setValue(e)}
+                    />
+                </div>
+                <div className="drop-div">
+                    <Select placeholder="Selecione um cinema"
+                        options={ar}
+                        labelField="nome"
+                        valueField="id"
+                        className="drop"
+                        onChange={e => setValue(e)}
+                    />
                 </div>
             </div>
-            <Filme />
+            <div className="filme-div">
+                <Filme />
+            </div>
         </div>
     )
 }
