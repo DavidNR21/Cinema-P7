@@ -5,14 +5,15 @@
 }
   
 .filme-card {
-    background-color: #fff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    background-color: #d6d6d6;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
     display: flex;
     flex-direction: row;
     border-radius: 8px;
     margin-left: 8px;
     margin-right: 8px;
     margin-bottom: 5px;
+    width: 400px;
     /*border: 1px solid green;*/
 }
   
@@ -69,17 +70,19 @@
     }
 
     .filme-card {
-        height: 465px;
+        height: 515px;
         display: flex;
         flex-direction: column;
         align-items: center;
-        background-color: #f1f1f1;
+        background-color: #d6d6d6;
+        margin-right: 10px;
+        width: 375px;
     }
 
     .filme-imagem {
-        width: 185px;
-        height: 230px;
-        object-fit: contain;
+        width: 200px;
+        height: 270px;
+        object-fit: cover;
         border-top-left-radius: 0px;
         border-bottom-left-radius: 0px;
     }

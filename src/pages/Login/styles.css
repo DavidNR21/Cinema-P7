@@ -12,6 +12,7 @@
 h2 {
     text-align: center;
     margin-bottom: 20px; /* Adiciona uma margem inferior ao título */
+    font-size: 2rem;
 }
 
 .form-group {

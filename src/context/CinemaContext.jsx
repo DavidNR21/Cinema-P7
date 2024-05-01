@@ -8,6 +8,8 @@ const CinemaProvider = ({ children }) => {
 
     const [count, setCount] = useState(1);
     const [emailUsuario, setEmailUsuario] = useState('')
+    const [cidade, setCidade] = useState('')
+    const [cinema, setCinema] = useState('')
 
     const incrementCount = () => {
         setCount(prevCount => prevCount + 1);
@@ -15,7 +17,16 @@ const CinemaProvider = ({ children }) => {
 
 
     return (
-        <CinemaContext.Provider value={{count, incrementCount, emailUsuario, setEmailUsuario}} >
+        <CinemaContext.Provider value={{
+            count,
+            setCidade,
+            cidade,
+            incrementCount,
+            cinema,
+            setCinema,
+            emailUsuario,
+            setEmailUsuario,
+        }} >
             {children}
         </CinemaContext.Provider>
     )

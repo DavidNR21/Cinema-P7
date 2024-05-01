@@ -5,12 +5,12 @@
 
 
 .filme-div{
-    margin-top: 17px;
+    margin-top: 20px;
 }
 
 
 .dropdown {
-    margin-top: 95px;
+    margin-top: 92px;
     max-width: 600px;
     margin-left: 10px;
     display: flex;
@@ -21,16 +21,17 @@
 
 .drop-div {
     /*border: 1px solid green;*/
-    width: 45%;
+    width: 270px;
 }
 
 .drop {
-    color: var(--terceary);
+    color: #050505;
     font-size: 1.05rem;
+    background-color: #bbbbbb;
 }
 
 
-@media (max-width : 498px) {
+@media (max-width : 590px) {
     .dropdown {
         display: flex;
         flex-direction: column;

@@ -13,7 +13,7 @@ function AppRoutes() {
                 <Route path="/" element = { <Home /> } />
                 <Route path="/Salas" element = { <Salas /> } />
                 <Route path="/Login" element = { <Login /> } />
-                <Route path="/Cadastro" element = { <Cadastro /> } />
+                <Route path="/cadastro" element = { <Cadastro /> } />
                 <Route path="/perfil" element = { <Perfil /> } />
             </Routes>
         </BrowserRouter>
