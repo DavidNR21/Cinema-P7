@@ -1,5 +1,6 @@
 import { useState, useContext } from 'react';
 import { toast } from 'react-toastify';
+import { Link } from 'react-router-dom';
 import { CinemaContext } from '../../context/CinemaContext';
 import 'react-toastify/dist/ReactToastify.css';
 import './styles.css'
@@ -17,6 +18,7 @@ const Login = () => {
     const saveUserData = (u) => {
         localStorage.setItem('userData', JSON.stringify(u));
     };
+    
 
     const fetchLogin = async (dados) => {
         try {
@@ -80,21 +82,31 @@ const Login = () => {
 
 
     return (
-        <div className="login-container">
-            <h2>Login</h2>
-            <form onSubmit={handleLogin}>
-                <div className="form-group">
-                    <label htmlFor="email">Email:</label>
-                    <input type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+        <div className='login-container'>
+            <div className='show-container'>
+                <div className='background-show'>
+                    <h2 className='show-title'>Bem-vindo</h2>
+                    <p className='show-p'>Para usar nossos serviços realize seu cadastro</p>
+                    <p className='show-p-2'>promoçoes, estreias, e muito mais...</p>
                 </div>
-                <div className="form-group">
-                    <label htmlFor="password">Senha:</label>
-                    <input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+            </div>
+            <div className='cadastro-container'>
+                <div className="login-box">
+                    <h2 className="logo-box">Login</h2>
+                    <form onSubmit={handleLogin}>
+                        <div className="form-group">
+                            <label htmlFor="email">Email:</label>
+                            <input type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="senha">Senha:</label>
+                            <input type="password" id="senha" value={password} onChange={(e) => setPassword(e.target.value)} />
+                        </div>
+                        <p className="recuperar-link">Esqueceu a senha? <Link to="/recuperar-senha">Clique aqui</Link></p>
+                        <button type="submit">{loading ? 'Carregando...' : 'Fazer Login'}</button>
+                    </form>
+                    <p className="cadastro-link">Ainda não possui uma conta? <Link to="/cadastro">Crie aqui</Link></p>
                 </div>
-                <button type="submit">{loading ? 'Carregando...' : 'Entrar'}</button>
-            </form>
-            <div className="forgot-password">
-                <a href="#">Esqueceu a senha?</a>
             </div>
         </div>
     );

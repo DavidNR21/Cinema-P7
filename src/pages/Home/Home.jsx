@@ -35,6 +35,7 @@ function Home (){
             const data = await response.json();
 
             setArrayCidade(data)
+            setLoading(false)
 
             return data;
             
@@ -73,7 +74,6 @@ function Home (){
         const filmes = await buscar_filmes()
 
         setFilme(filmes.data)
-        setLoading(false)
 
     }
 
@@ -119,6 +119,7 @@ function Home (){
                     />
                 </div>
             </div>
+
             {
                 loading ? (
                     <Loading />

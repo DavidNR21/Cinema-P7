@@ -1,62 +1,175 @@
+
 .login-container {
     width: 100%;
-    max-width: 400px;
-    margin: 50px auto; /* Ajuste a margem superior para não ficar tão colado ao topo */
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #fff;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
 }
 
-h2 {
+.show-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    height: 100%;
+    /*border: 1px solid red;*/
+    background-image: url('https://classic.exame.com/wp-content/uploads/2020/12/GettyImages-133033277.jpg?quality=70&strip=info&w=1024');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.7);
+}
+
+
+.background-show {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 350px;
+    height: 400px;
+    backdrop-filter: blur(8px); /* Adiciona o efeito de desfoque */
+    background-color: rgba(255, 255, 255, 0.4);
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+}
+
+.show-title{
+    font-size: 2.1rem;
+    font-weight: 500;
+}
+
+.show-p {
+    font-size: 1.5rem;
+    width: 100%;
     text-align: center;
-    margin-bottom: 20px; /* Adiciona uma margem inferior ao título */
-    font-size: 2rem;
+}
+
+.show-p-2 {
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.cadastro-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(12px); /* Adiciona o efeito de desfoque */
+    background-color: rgba(255, 255, 255, 0.6);
+    width: 50%;
+    height: 100%;
+}
+
+.login-box {
+    width: 450px;
+    margin: 40px auto;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #1A282D;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+}
+
+.logo-box {
+    text-align: center;
+    color: #fff;
+    font-size: 1.9rem;
 }
 
 .form-group {
     margin-bottom: 20px;
 }
-
+  
 label {
     display: block;
-    font-weight: bold;
+    font-weight: 600;
+    color: #fff;
 }
-
+  
 input[type='email'],
-input[type='password'] {
+input[type='password'],
+input[type='text'],
+input[type='date'] {
     width: 100%;
     padding: 10px;
     font-size: 16px;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 4px;
+    background-color: #fff; /* Adicionando fundo branco aos campos de entrada */
+    color: #333; /* Definindo a cor do texto para preto */
 }
-
+  
 button {
+    display: block;
     width: 100%;
     padding: 10px;
     font-size: 16px;
-    color: #fff;
     background-color: #007bff;
+    color: #fff;
     border: none;
-    border-radius: 5px;
+    border-radius: 4px;
     cursor: pointer;
 }
 
-button:hover {
-    background-color: #0056b3;
+.recuperar-link {
+    text-align: end;
+    margin-top: 15px;
+    margin-bottom: 30px;
+    color: #fff;
 }
 
-.forgot-password {
-    text-align: center;
-}
-
-.forgot-password a {
+.recuperar-link a {
     color: #007bff;
     text-decoration: none;
 }
 
-.forgot-password a:hover {
+.recuperar-link a:hover {
     text-decoration: underline;
+}
+  
+button:hover {
+    background-color: #0056b3;
+}
+
+.cadastro-link {
+    text-align: center;
+    margin-top: 20px;
+    color: #fff;
+}
+
+.cadastro-link a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.cadastro-link a:hover {
+    text-decoration: underline;
+}
+
+
+@media (max-width : 715px) {
+    .login-container{
+        flex-direction: column;
+        height: 100%;
+        background-image: url('https://classic.exame.com/wp-content/uploads/2020/12/GettyImages-133033277.jpg?quality=70&strip=info&w=1024');
+        background-repeat: repeat-y;
+        background-position: center;
+        background-size: cover;
+    }
+
+    .show-container{
+        width: 100%;
+        height: 50%;
+        padding: 10px;
+        background-image: none;
+    }
+
+    .cadastro-container{
+        width: 100%;
+        height: 50%;
+    }
+
+    .return{
+        display: none;
+    }
+
 }
