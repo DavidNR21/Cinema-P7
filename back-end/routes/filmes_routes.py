@@ -17,6 +17,7 @@ def createFilme():
         horario = data['horario']
         duracao = data['duracao']
         dublagem = data['dublagem']
+        cinema = data['cinema_nome']
         sala = data['sala_nome']
 
 
@@ -27,6 +28,7 @@ def createFilme():
             horarios = horario,
             dub_leg = dublagem,
             duracao = duracao,
+            cinema = cinema,
             sala = Salas.select().where(Salas.nome_sala == sala).get()
         )
         filme.save()
@@ -47,14 +49,14 @@ def createFilme():
 
 
 
-@filme_bp.route('/', methods=['GET'])  # pegar todos os filmes disponiveis
+@filme_bp.route('/all', methods=['GET'])  # pegar todos os filmes disponiveis
 def getFilme():
     try:
         
         filmes = Filmes.select()
 
         
-        filmes_dict = [model_to_dict(promocao) for promocao in filmes]
+        filmes_dict = [model_to_dict(f) for f in filmes]
 
         return jsonify(filmes_dict), 200
 
@@ -62,5 +64,21 @@ def getFilme():
         error_message = {"error": str(e)}
         print("Erro:", e)
         return jsonify(error_message), 400
-    
+
+
+@filme_bp.route('/<string:cinema>', methods=['GET'])  # pegar todos os filmes disponiveis
+def getFilme_por_cinema(cinema):
+    try:
+        
+        filmes = Filmes.select().where(Filmes.cinema == cinema)
+
+        
+        filmes_dict = [model_to_dict(f) for f in filmes]
+
+        return jsonify(filmes_dict), 200
+
+    except Exception as e:
+        error_message = {"error": str(e)}
+        print("Erro:", e)
+        return jsonify(error_message), 400
 

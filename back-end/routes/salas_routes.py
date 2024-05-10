@@ -15,12 +15,14 @@ def createSala():
         lugares = data['quantidade_de_lugares']
         tipo = data['tipo']
         img_sala = data['img']
+        cinema = data['cinema_nome']
 
         sala = Salas(
             nome_sala = nome,
             img_sala = img_sala,
             tipo = tipo,
             quantidade_de_lugares = lugares,
+            cinema_nome = cinema
         )
         sala.save()
 
@@ -39,12 +41,27 @@ def createSala():
         print("Erro:", e)
         return jsonify(error_message), 400
     
+@sala_bp.route('/', methods=['GET'])
+def salas():
+    try:
+        salas = Salas.select()
+        
+        salas_dict = [model_to_dict(sala) for sala in salas]
 
-@sala_bp.route('/', methods=['GET'])  # usando para pegar as salas e se possui lugares
-def getSlas():
+
+        return jsonify(salas_dict), 200
+
+    except Exception as e:
+        error_message = {"error": str(e)}
+        print("Erro:", e)
+        return jsonify(error_message), 400
+
+
+@sala_bp.route('/<string:cinema>', methods=['GET'])  # usando na tela de Salas
+def getSlas(cinema):
     try:
         
-        salas = Salas.select()
+        salas = Salas.select().where(Salas.cinema_nome == cinema)
 
         lugares_reservados_por_sala = {}
         
@@ -73,4 +90,23 @@ def getSlas():
         return jsonify(error_message), 400
 
 
-    
+@sala_bp.route('/v2/<string:nome_cinema>', methods=['GET'])
+def get_salas_e_reservas_por_cinemav2(nome_cinema):
+    try:
+        # Obtém todas as salas e suas reservas associadas ao cinema especificado
+        salas_com_reservas = []
+        
+        for sala in Salas.select().where(Salas.cinema_nome == nome_cinema):
+            reservas_sala = Reservas.select().where(Reservas.sala == sala)
+            cadeiras_reservadas = [json.loads(reserva.cadeiras) for reserva in reservas_sala]
+            salas_com_reservas.append({
+                "sala": model_to_dict(sala),
+                "reservas": cadeiras_reservadas
+            })
+
+        return jsonify(salas_com_reservas), 200
+
+    except Exception as e:
+        error_message = {"error": str(e)}
+        print("Erro:", e)
+        return jsonify(error_message), 400

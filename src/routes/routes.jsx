@@ -4,6 +4,7 @@ import Cadastro from "../pages/Cadastro/Cadastro"
 import Login from "../pages/Login/Login"
 import Salas from "../pages/Salas/Salas"
 import Perfil from "../pages/Perfil/Perfil"
+import Details from "../pages/Details/Details"
 
 
 function AppRoutes() {
@@ -13,8 +14,9 @@ function AppRoutes() {
                 <Route path="/" element = { <Home /> } />
                 <Route path="/Salas" element = { <Salas /> } />
                 <Route path="/Login" element = { <Login /> } />
-                <Route path="/cadastro" element = { <Cadastro /> } />
-                <Route path="/perfil" element = { <Perfil /> } />
+                <Route path="/Cadastro" element = { <Cadastro /> } />
+                <Route path="/Perfil" element = { <Perfil /> } />
+                <Route path="/Details" element = { <Details /> } />
             </Routes>
         </BrowserRouter>
     )

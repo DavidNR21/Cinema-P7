@@ -91,32 +91,32 @@ function Cadastro() {
   return (
     <div className="container">
       <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="nome">Nome:</label>
+        <div className="form-group-cad">
+          <label className='label-cad' htmlFor="nome">Nome:</label>
           <input type="text" id="nome" value={nome} onChange={(e) => setNome(e.target.value)} />
         </div>
-        <div className="form-group">
-          <label htmlFor="email">Email:</label>
+        <div className="form-group-cad">
+          <label className='label-cad' htmlFor="email">Email:</label>
           <input type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} />
         </div>
-        <div className="form-group">
-          <label htmlFor="cpf">CPF:</label>
+        <div className="form-group-cad">
+          <label className='label-cad' htmlFor="cpf">CPF:</label>
           <input type="text" id="cpf" value={cpf} onChange={(e) => setCpf(e.target.value)} />
         </div>
-        <div className="form-group">
-          <label htmlFor="senha">Senha:</label>
+        <div className="form-group-cad">
+          <label className='label-cad' htmlFor="senha">Senha:</label>
           <input type="password" id="senha" value={senha} onChange={(e) => setSenha(e.target.value)} />
         </div>
-        <div className="form-group">
-          <label htmlFor="celular">Celular:</label>
+        <div className="form-group-cad">
+          <label className='label-cad' htmlFor="celular">Celular:</label>
           <input type="text" id="celular" value={celular} onChange={(e) => setCelular(e.target.value)} />
         </div>
-        <div className="form-group">
-          <label htmlFor="sexo">Sexo:</label>
+        <div className="form-group-cad">
+          <label className='label-cad' htmlFor="sexo">Sexo:</label>
           <input type="text" id="sexo" value={sexo} onChange={(e) => setSexo(e.target.value)} />
         </div>
-        <div className="form-group">
-          <label htmlFor="nascimento">Nascimento:</label>
+        <div className="form-group-cad">
+          <label className='label-cad' htmlFor="nascimento">Nascimento:</label>
           <input type="date" id="nascimento" value={nascimento} onChange={(e) => setNascimento(e.target.value)} />
         </div>
         <button type="submit">Fazer Cadastro</button>

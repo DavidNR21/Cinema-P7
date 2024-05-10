@@ -1,6 +1,6 @@
 import { useState, useContext } from 'react';
 import { toast } from 'react-toastify';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { CinemaContext } from '../../context/CinemaContext';
 import 'react-toastify/dist/ReactToastify.css';
 import './styles.css'
@@ -14,6 +14,7 @@ const Login = () => {
     const [userData, setUserData] = useState({})
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
+    const navigation = useNavigate()
 
     const saveUserData = (u) => {
         localStorage.setItem('userData', JSON.stringify(u));
@@ -68,6 +69,7 @@ const Login = () => {
                 saveUserData(response.data)
 
                 console.log('Usuário Logado com sucesso:', userData);
+                navigation('/')
             }
             else{
                 toast.error('Erro ao Logar usuário');
@@ -86,7 +88,7 @@ const Login = () => {
             <div className='show-container'>
                 <div className='background-show'>
                     <h2 className='show-title'>Bem-vindo</h2>
-                    <p className='show-p'>Para usar nossos serviços realize seu cadastro</p>
+                    <p className='show-p'>Para usar nossos serviços realize seu Login.</p>
                     <p className='show-p-2'>promoçoes, estreias, e muito mais...</p>
                 </div>
             </div>
@@ -105,7 +107,7 @@ const Login = () => {
                         <p className="recuperar-link">Esqueceu a senha? <Link to="/recuperar-senha">Clique aqui</Link></p>
                         <button type="submit">{loading ? 'Carregando...' : 'Fazer Login'}</button>
                     </form>
-                    <p className="cadastro-link">Ainda não possui uma conta? <Link to="/cadastro">Crie aqui</Link></p>
+                    <p className="cadastro-link">Ainda não possui uma conta? <Link to="/Cadastro">Crie aqui</Link></p>
                 </div>
             </div>
         </div>

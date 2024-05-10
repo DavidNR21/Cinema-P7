@@ -1,4 +1,5 @@
 //import { useEffect, useState } from "react";
+import { Link } from 'react-router-dom';
 //import Container from "../../components/Container/Container";
 import './styles.css'
 
@@ -27,7 +28,9 @@ function Filme ({ filmesArray }){
             </div>
 
             <div className='ingresso-div'>
-              <span>Comprar Ingresso</span>
+              <Link to='/Details'>
+                <span>Comprar Ingresso</span>
+              </Link>
             </div>
           </div>
         </div>

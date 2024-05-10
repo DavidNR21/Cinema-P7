@@ -16,7 +16,7 @@ class Usuarios(BaseModel):
     nome = TextField()
     email = TextField(unique=True, null=False)
     cpf = TextField(unique=True, null=False)
-    senha = TextField(null=False)
+    senha = TextField()
     celular = TextField()
     sexo = TextField()
     nascimento = DateField()
@@ -44,6 +44,12 @@ class Salas(BaseModel):
     img_sala = TextField()
     tipo = TextField()
     quantidade_de_lugares = IntegerField()
+    cinema_nome = TextField()
+
+
+class Cidades(BaseModel):
+    nome_cidade = TextField()
+    cinema_nome = TextField(unique=True)
 
 
 class Filmes(BaseModel):
@@ -53,18 +59,20 @@ class Filmes(BaseModel):
     horarios = TextField()
     dub_leg = TextField()
     duracao = TextField()
-    sala = ForeignKeyField(Salas, backref='reservas', on_delete='CASCADE')
+    cinema = TextField(null=True)
+    sala = ForeignKeyField(Salas, backref='filmes', on_delete='CASCADE')
 
 
 class Reservas(BaseModel):
     usuario = ForeignKeyField(Usuarios, backref='reservas', on_delete='CASCADE')
     sala = ForeignKeyField(Salas, backref='reservas', on_delete='CASCADE')
     filme = ForeignKeyField(Filmes, backref='reservas', on_delete='CASCADE')
+    cidade = ForeignKeyField(Cidades, backref='reservas', on_delete='CASCADE')
     ingressos = IntegerField()
     horario = TextField()
     cadeiras = TextField()
 
 
 db.connect()
-db.create_tables([Usuarios, Filmes, Salas, Reservas])
+db.create_tables([Usuarios, Filmes, Salas, Reservas, Cidades])
 db.close()
