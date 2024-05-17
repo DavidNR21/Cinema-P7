@@ -1,5 +1,457 @@
 
 .details-container{
     width: 100%;
+    height: 100vh;
+    /*border: 1px solid red;*/
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.bt-return {
+    position: absolute;
+    top: 5px;
+    left: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    background-color: #1A282D;
+    border-radius: 100%;
+    z-index: 99;
+    cursor: pointer;
+}
+
+.load {
+    width: 100%;
     height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#arrow-left {
+    color: #fff;
+    font-size: 1.6rem;
+}
+
+
+.left-content {
+    width: 65%;
+    height: 90%;
+    /*border: 1px solid green;*/
+    display: flex;flex-direction: column;
+}
+
+.datas-div {
+    background-color: #fff;
+    margin-top: 20px;
+    height: 25%;
+    width: 95%;
+    margin-left: 10px;
+}
+
+.datas-div p {
+    font-size: 1.5rem;
+    margin-left: 10px;
+    margin-top: 5px;
+}
+
+hr {
+    margin-left: 10px;
+    width: 95%;
+}
+
+.reservas-div {
+    width: 95%;
+    background-color: #fff;
+    height: 71%;
+    margin-left: 10px;
+}
+
+.cidade-infos {
+    margin-left: 10px;
+    margin-top: 20px;
+    font-size: 1.2rem;
+}
+
+.form-group-res {
+    margin-bottom: 0.4rem;
+    margin-top: 15px;
+}
+  
+.label-res {
+    display: block;
+    font-weight: 500;
+    color: #050505;
+    margin-left: 10px;
+}
+
+input[type='number'] {
+    width: 50%;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-left: 10px;
+}
+
+.form-group-res span {
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-left: 10px;
+}
+
+.salas-list {
+    display: flex;
+    width: 100%;
+    height: 100px;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: row;
+}
+
+.salas-list-item {
+    display: flex;
+    flex-direction: row;
+    width: 150px;
+    padding: 5px;
+    justify-content: space-around;
+    border: 1px solid #808080;
+    border-radius: 8px;
+    background-color: var(--red);
+    color: #fff;
+    cursor: pointer;
+}
+
+.horarios-comp {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 20px;
+}
+
+
+.horario-item {
+    display: flex;
+    flex-direction: row;
+    width: 80px;
+}
+
+
+.H {
+    color: #050505;
+}
+
+
+.right-content {
+    width: 35%;
+    height: 90%;
+    
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+
+.rigth-content-details {
+    width: 90%;
+    background-color: #fff;
+    height: 96.7%;
+}
+
+.rigth-content-info-filme{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    padding: 5px;
+}
+
+.rigth-content-info-filme img {
+    width: 145px;
+    height: 200px;
+    border-radius: 8px;
+    margin-left: 5px;
+    margin-top: 5px;
+}
+
+
+.informaçoes-details {
+    width: calc(100% - 150px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+
+.informaçoes-details p {
+    font-size: 1.3rem;
+    margin-left: 15px;
+    font-weight: 500;
+    text-align: left;
+    text-overflow: ellipsis;
+}
+
+.dublagem {
+    margin-left: 15px;
+    border: 1px solid var(--red);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    width: 80px;
+    height: 25px;
+    color: var(--red);
+}
+
+
+.infos-cinema {
+    display: flex;
+    flex-direction: column;
+    margin-left: 15px;
+}
+
+.infos-cinema span {
+    color: #363636;
+    font-size: 1rem;
+    text-overflow: ellipsis;
+}
+
+
+.dias-salas-horario {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.dias-salas-horario p {
+    font-weight: 600;
+}
+
+.dias-salas-horario span {
+    font-weight: 400;
+}
+
+.linha {
+    margin-left: 10px;
+    width: 95%;
+    margin-top: 8px;
+}
+
+.ingressso-preco {
+    width: 100%;
+    padding: 5px;
+}
+
+.ingressso-preco p {
+    margin-left: 10px;
+    font-weight: 500;
+    font-size: .9rem;
+}
+
+.ingressso-preco span {
+    margin-left: 10px;
+    font-size: .9rem;
+}
+
+
+.lugares-div {
+    margin-top: 10px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+.poltronas {
+    display: flex;
+    justify-content: space-evenly;
+    width: 40%;
+}
+
+.poltronas div {
+    display: flex;
+    align-items: center;
+    border-radius: 12px;
+    width: 40px;
+    height: 30px;
+    border: 1px solid var(--red);
+}
+
+.poltronas div p {
+    color: var(--red);
+    font-weight: 500;
+    font-size: .9rem;
+}
+
+
+.resumo-compra {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+    border-radius: 5px;
+    max-width: 100%;
+    margin: 0 auto;
+}
+  
+.resumo-left,
+.resumo-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+  
+.resumo-right {
+    align-items: flex-end;
+    margin-right: 5px;
+}
+  
+.resumo-left p,
+.resumo-right p {
+    margin: 5px 0;
+    font-weight: 500;
+}
+
+.resumo-left span,
+.resumo-right span {
+    font-size: .8rem;
+    font-weight: 400;
+}
+
+
+.link{
+    color: #fff;
+    text-decoration: none;
+}
+
+
+.continuar-compra {
+    width: 100%;
+    height: 75px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.continuar-compra-bt {
+    width: 220px;
+    background-color: #050505;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #fff;
+    border-radius: 10px;
+    height: 45px;
+}
+
+
+.continuar-compra-bt p {
+    font-size: 1rem;
+}
+
+
+/* Modal */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .modal-content {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  .container {
+    position: relative;
+    max-width: 800px;
+    width: 100%;
+  }
+  
+  .screen {
+    background-color: #f0f0f0;
+    height: 30px;
+    width: 100%;
+    margin: 15px 0;
+    transform: rotateX(-45deg);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.75);
+  }
+  
+  .rows-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .row {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+  
+  .seat {
+    background-color: #dfdfdf;
+    height: 20px;
+    width: 20px;
+    margin: 2px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .seat.selected {
+    background-color: #fff;
+    cursor: pointer;
+  }
+
+  .selecionado {
+    color: #fff;
+  }
+  
+  .seat.occupied {
+    background-color: #444451;
+    cursor: pointer;
+  }
+  
+  .showcase {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .showcase ul {
+    display: flex;
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .showcase li {
+    margin-right: 20px;
+  }
+  
+  .showcase li small {
+    margin-left: 5px;
+  }
+  
+  .sala-info p {
+    margin: 5px 0;
+    font-size: 1rem;
+    font-weight: 500;
 }

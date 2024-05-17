@@ -16,7 +16,7 @@ function AppRoutes() {
                 <Route path="/Login" element = { <Login /> } />
                 <Route path="/Cadastro" element = { <Cadastro /> } />
                 <Route path="/Perfil" element = { <Perfil /> } />
-                <Route path="/Details" element = { <Details /> } />
+                <Route path="/Details/:id" element = { <Details /> } />
             </Routes>
         </BrowserRouter>
     )

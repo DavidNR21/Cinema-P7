@@ -10,7 +10,7 @@ const CardSalas = ({ salaArray }) => {
 
     const handleSalaClick = (sala) => {
         setSelectedSala(sala);
-        console.log(sala.sala.quantidade_de_lugares)
+        console.log(sala)
         setModalOpen(true);
     };
 
