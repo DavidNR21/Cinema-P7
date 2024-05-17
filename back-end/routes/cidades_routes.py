@@ -12,13 +12,13 @@ def createCidades():
         data = request.get_json()
 
         nome = data['nome_cidade']
-        cinema = data['cidade_nome']
+        cinema = data['cinema_nome']
 
-        cidade = Cidades(
+        
+        Cidades.create(
             nome_cidade = nome,
             cinema_nome = cinema
         )
-        cidade.save()
 
 
         response = {
@@ -57,7 +57,7 @@ def getCidades_v2():
     try:
         cidades = (
             Cidades
-            .select(Cidades.nome_cidade, fn.MIN(Cidades.id).alias('id'))
+            .select(Cidades.nome_cidade)
             .group_by(Cidades.nome_cidade)
         )
 

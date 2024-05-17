@@ -22,17 +22,20 @@ def addUser():
 
         senha_criptografada = bcrypt.hashpw(senha.encode('utf-8'), bcrypt.gensalt())
 
-        user = Usuarios(
+        cpf_formatado = '{}.{}.{}-{}'.format(cpf[:3], cpf[3:6], cpf[6:9], cpf[9:])
+        print(cpf_formatado)
+
+        Usuarios.create(
             nome = nome,
             email = email,
-            cpf = cpf,
+            cpf = cpf_formatado,
             senha = senha_criptografada,
             celular = telefone,
             sexo = sexo,
             nascimento = nascimento,
             isAdmin = False
         )
-        user.save()
+        #user.save()
 
         response = {
             "message": "Dados JSON recebidos e processados com sucesso",
@@ -154,6 +157,7 @@ def login():
         if bcrypt.checkpw(senha.encode('utf-8'), senha_obtida.encode('utf-8')):
 
             user_json['senha'] = senha
+            user_json['id'] = user.id
 
             response = {
                 "message": f"Login feito com sucesso.",

@@ -18,10 +18,9 @@ def createFilme():
         duracao = data['duracao']
         dublagem = data['dublagem']
         cinema = data['cinema_nome']
-        sala = data['sala_nome']
 
 
-        filme = Filmes(
+        Filmes.create(
             nome_filme = nome,
             imagem = img,
             preco_ingresso = preco,
@@ -29,9 +28,8 @@ def createFilme():
             dub_leg = dublagem,
             duracao = duracao,
             cinema = cinema,
-            sala = Salas.select().where(Salas.nome_sala == sala).get()
         )
-        filme.save()
+        #filme.save()
 
 
         response = {
@@ -66,7 +64,7 @@ def getFilme():
         return jsonify(error_message), 400
 
 
-@filme_bp.route('/<string:cinema>', methods=['GET'])  # pegar todos os filmes disponiveis
+@filme_bp.route('/<string:cinema>', methods=['GET'])
 def getFilme_por_cinema(cinema):
     try:
         
@@ -82,3 +80,37 @@ def getFilme_por_cinema(cinema):
         print("Erro:", e)
         return jsonify(error_message), 400
 
+
+
+@filme_bp.route('/details/<string:id>', methods=['GET'])
+def getFilme_por_id(id):
+    try:
+
+        query = Filmes.select().where(Filmes.id == id)
+
+        f = [model_to_dict(item) for item in query]
+
+        query_sala = Salas.select().where(Salas.cinema_nome == f[0]['cinema'])
+
+        s = [model_to_dict(item_sala) for item_sala in query_sala]
+
+        query_cidade = Cidades.select().where(Cidades.cinema_nome == s[0]['cinema_nome'])
+
+        c = [model_to_dict(item_cidade) for item_cidade in query_cidade]
+
+        f[0]['salas'] = s
+        f[0]['cidades'] = c
+
+        print(f[0]['nome_filme'])
+
+        # Retornando o dicionário como JSON
+        return jsonify(f), 200
+
+
+    except Filmes.DoesNotExist:
+        return jsonify({"error": "Filme não encontrado"}), 404
+
+    except Exception as e:
+        error_message = {"error": str(e)}
+        print("Erro:", e)
+        return jsonify(error_message), 400

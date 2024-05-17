@@ -17,14 +17,14 @@ def createSala():
         img_sala = data['img']
         cinema = data['cinema_nome']
 
-        sala = Salas(
+        Salas.create(
             nome_sala = nome,
             img_sala = img_sala,
             tipo = tipo,
             quantidade_de_lugares = lugares,
             cinema_nome = cinema
         )
-        sala.save()
+        #sala.save()
 
 
         response = {
@@ -40,6 +40,7 @@ def createSala():
         error_message = {"error": str(e)}
         print("Erro:", e)
         return jsonify(error_message), 400
+    
     
 @sala_bp.route('/', methods=['GET'])
 def salas():

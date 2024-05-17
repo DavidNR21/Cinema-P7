@@ -1,4 +1,6 @@
 from peewee import *
+from flask_login import UserMixin
+import uuid
 import json
 
 
@@ -12,20 +14,20 @@ class BaseModel(Model):
         database = db
 
 
-class Usuarios(BaseModel):
-    nome = TextField()
-    email = TextField(unique=True, null=False)
-    cpf = TextField(unique=True, null=False)
-    senha = TextField()
-    celular = TextField()
-    sexo = TextField()
+class Usuarios(BaseModel, UserMixin):
+    id = UUIDField(primary_key=True, default=uuid.uuid4)
+    nome = CharField(max_length=200)
+    email = CharField(max_length=200, unique=True)
+    cpf = CharField(max_length=25, unique=True)
+    senha = CharField(max_length=200)
+    celular = CharField(max_length=200)
+    sexo = CharField(max_length=200)
     nascimento = DateField()
     isAdmin = BooleanField()
     criadoEm = DateTimeField(constraints=[SQL('DEFAULT CURRENT_TIMESTAMP')])
 
     def to_json(self):
         data = {
-            "id" : self.id,
             "nome" : self.nome,
             "email" : self.email,
             "senha" : self.senha,
@@ -40,37 +42,40 @@ class Usuarios(BaseModel):
 
 
 class Salas(BaseModel):
-    nome_sala = TextField()
-    img_sala = TextField()
-    tipo = TextField()
+    id = UUIDField(primary_key=True, default=uuid.uuid4)
+    nome_sala = CharField(max_length=200)
+    img_sala = CharField(max_length=256)
+    tipo = CharField(max_length=200)
     quantidade_de_lugares = IntegerField()
-    cinema_nome = TextField()
+    cinema_nome = CharField(max_length=200)
 
 
 class Cidades(BaseModel):
-    nome_cidade = TextField()
-    cinema_nome = TextField(unique=True)
+    id = UUIDField(primary_key=True, default=uuid.uuid4)
+    nome_cidade = CharField(max_length=100)
+    cinema_nome = CharField(max_length=100)
 
 
 class Filmes(BaseModel):
-    nome_filme = TextField()
+    id = UUIDField(primary_key=True, default=uuid.uuid4)
+    nome_filme = CharField(max_length=100)
     imagem = TextField()
     preco_ingresso = FloatField()
-    horarios = TextField()
-    dub_leg = TextField()
-    duracao = TextField()
+    horarios = CharField(max_length=100)
+    dub_leg = CharField(max_length=100)
+    duracao = CharField(max_length=100)
     cinema = TextField(null=True)
-    sala = ForeignKeyField(Salas, backref='filmes', on_delete='CASCADE')
 
 
 class Reservas(BaseModel):
+    id = UUIDField(primary_key=True, default=uuid.uuid4)
     usuario = ForeignKeyField(Usuarios, backref='reservas', on_delete='CASCADE')
     sala = ForeignKeyField(Salas, backref='reservas', on_delete='CASCADE')
     filme = ForeignKeyField(Filmes, backref='reservas', on_delete='CASCADE')
     cidade = ForeignKeyField(Cidades, backref='reservas', on_delete='CASCADE')
-    ingressos = IntegerField()
-    horario = TextField()
-    cadeiras = TextField()
+    horario = CharField(max_length=100)
+    cadeiras = CharField(max_length=200)
+
 
 
 db.connect()
