@@ -1,25 +1,24 @@
-import { useState } from 'react';
+
 import './styles.css'
 
 
-const ModalReserva = ({ selectedSala }) => {
+const ModalReserva = ({ closeModal, modalOpen, selectedSala, q, setPol, pol }) => {
 
-    const [modalOpen, setModalOpen] = useState(false);
-
-
-    const handleSalaClick = (sala) => {
-        console.log(sala.sala.quantidade_de_lugares)
-        setModalOpen(true);
+    const handleSeatClick = (poltrona) => {
+        setPol((prevPoltronas) => {
+          if (prevPoltronas.includes(poltrona)) {
+            // Remove the item if it is already in the array
+            return prevPoltronas.filter((item) => item !== poltrona);
+          } else {
+            // Add the item if it is not in the array
+            return [...prevPoltronas, poltrona];
+          }
+        });
+        console.log(`assento numero: ${poltrona}, ${q}, ${pol}`)
     };
 
-    const closeModal = () => {
-        console.log(selectedSala.sala.quantidade_de_lugares)
-        setModalOpen(false);
-    };
 
-    const handleSeatClick = (lugarNumero) => {
-        console.log('Assento clicado:', lugarNumero);
-    };
+    if (!modalOpen || !selectedSala) return null;
 
 
     return(
@@ -36,7 +35,7 @@ const ModalReserva = ({ selectedSala }) => {
                                     {Array.from({ length: 8 }, (_, seatIndex) => {
                                         const seatNumber = rowIndex * 8 + seatIndex + 1;
                                         const isOccupied = selectedSala.reservas.includes(seatNumber);
-                                        const isSelected = false;
+                                        const isSelected = pol.includes(seatNumber);
                                         let seatClass = 'seat';
                                         if (isOccupied) seatClass += ' occupied';
                                         if (isSelected) seatClass += ' selected';

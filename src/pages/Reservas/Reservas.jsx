@@ -1,15 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState, useContext } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { CinemaContext } from '../../context/CinemaContext';
+import { toast } from 'react-toastify';
 import DataCards from '../../components/DataCards/DataCards';
-//import ModalReserva from '../../components/ModalReserva/ModalReserva';
 import './styles.css'
 import Loading from '../../components/Loading/Loading';
+import ModalReserva from '../../components/ModalReserva/ModalReserva';
 
 
 
-const Details = () => {
+const Reservas = () => {
 
     const meses = ['jan', 'fev', 'mar', 'abr', 'mai', 'jun','jul', 'ago', 'set', 'out', 'nov', 'dez'];
       
@@ -22,13 +23,17 @@ const Details = () => {
     const [valor, setValor] = useState(10.00)
     const [dados, setDados] = useState([])
     const [loading, setLoading] = useState(true)
-
-    const [modalOpen, setModalOpen] = useState(false);
-    const [selectedSala, setSelectedSala] = useState(null);
-
     const serviceFee = 1.20;
-    const horarios = ['18:00', '19:00', '20:00'];
+    const horarios = ['17:45', '19:00', '21:15'];
     const parametros = useParams();
+    const [selectedSala, setSelectedSala] = useState([]);
+    const [poltronas, setPoltronas] = useState([])
+    const navigation = useNavigate()
+
+    // modal
+    const [modalOpen, setModalOpen] = useState(false);
+    const [Sala, setSala] = useState({});
+
 
 
     function formatCurrency(value) {
@@ -39,7 +44,7 @@ const Details = () => {
     const handleCheckboxChange = (event) => {
         const { value } = event.target;
         setSelectedHorarios(value);
-        console.log(value)
+        //console.log(value)
     };
 
 
@@ -52,24 +57,37 @@ const Details = () => {
 
 
     async function fechtFilme(id){
-        console.log(id)
         try {
             const response = await fetch(`http://127.0.0.1:5000/filme/details/${id}`);
             const result = await response.json();
             setDados(result);
-            console.log(result)
             setLoading(false)
             setValor(result[0]['preco_ingresso'])
-            console.log(result[0]['cidades'][0]['nome_cidade'])
+            //console.log(result[0])
+            ToggleSalas(result[0]['cinema'])
+
         } catch (error) {
             console.log(error);
         }
     }
 
-    async function toggleModalSala(s){
-        setSalaFilme(s)
+    function toggleModalSala(s){
+        setSalaFilme(s.sala.nome_sala)
+        //console.log(s)
+        setSala(s)
+        setModalOpen(true)
+    }
+
+
+    const closeModal = () => {
+        setModalOpen(false);
+    };
+
+
+
+    const ToggleSalas = async (cine) => {
         try {
-            const response = await fetch(`http://127.0.0.1:5000/sala/v2/${dados[0]['cinema']}`, {
+            const response = await fetch(`http://127.0.0.1:5000/sala/v2/${cine}`, {
                 method: 'GET'
             });
     
@@ -79,29 +97,83 @@ const Details = () => {
     
             const data = await response.json();
 
-            console.log(data[0])
-            handleSalaClick(data[0])
+            //console.log(data)
+            setSelectedSala(data)
     
         } catch (error) {
             console.error('Erro ao enviar requisição:', error);
             return { error: error.message };
         }
+    };
+
+    const getUserData = () => {
+        const userData = localStorage.getItem('userData');
+        return userData ? JSON.parse(userData) : null;
+    };
+
+    
+    async function FazerReserva (){
+
+        const userData = getUserData();
+
+        if (userData) {
+            //toast.success('Usuário Logado com sucesso!');
+            console.log(userData)
+
+            if (poltronas.length != quantidade){
+                toast.error('Numeros de cadeiras e ingressos são diferentes.')
+            }
+
+            else{
+
+                const DATA = {
+                    nome_usuario : userData['nome'],
+                    nome_sala : salaFilme,
+                    nome_filme : dados[0]['nome_filme'],
+                    nome_cinema : dados[0]['cidades'][0]['cinema_nome'],
+                    horario : selectedHorarios,
+                    cadeiras : poltronas,
+                    ingressos : quantidade
+                }
+    
+                console.log(DATA)
+
+                try {
+                    const response = await fetch('http://127.0.0.1:5000/reservas/criar', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(DATA)
+                    });
+                    
+                    if (!response.ok) {
+                        throw new Error('Erro ao fazer reserva');
+                    }
+            
+                    const data = await response.json();
+            
+                    toast.success('Reserva feita com sucesso!');
+            
+                    return data;
+            
+                } catch (error) {
+                    console.error('Erro ao enviar requisição:', error);
+            
+                    toast.error('Erro ao Fazer reserva');
+            
+                    throw error;
+                }
+
+            }
+
+        } else {
+            console.log('No user data found in localStorage');
+            toast.error('Faça Login para Seguir');
+            navigation(`/Login`)
+        }
     }
 
-    const handleSalaClick = (sala) => {
-        setSelectedSala(sala);
-        console.log(sala.sala.quantidade_de_lugares)
-        setModalOpen(true);
-    };
-
-    const closeModal = () => {
-        console.log(selectedSala.sala.quantidade_de_lugares)
-        setModalOpen(false);
-    };
-
-    const handleSeatClick = (lugarNumero) => {
-        console.log('Assento clicado:', lugarNumero);
-    };
 
     ////////////////////////////////////////////////////////////////////////////
 
@@ -126,7 +198,7 @@ const Details = () => {
 
     return(
         <div className='details-container'>
-            <div className='bt-return'>
+            <div className='bt-return' onClick={() => navigation(`/`)}>
                 <i className='bx bx-left-arrow-alt' id='arrow-left'></i>
             </div>
 
@@ -162,10 +234,10 @@ const Details = () => {
                                         Salas Disponiveis:
                                     </span>
                                     <div className='salas-list'>
-                                        {dados[0]['salas'].map((sala, index) => (
-                                            <div key={index} className='salas-list-item' onClick={() => toggleModalSala(sala.nome_sala, sala)}>
-                                                <span>{sala.nome_sala}</span>
-                                                <span>{sala.tipo}</span>
+                                        {selectedSala.map((sala, index) => (
+                                            <div key={index} className='salas-list-item' onClick={() => toggleModalSala(sala)}>
+                                                <span>{sala.sala.nome_sala}</span>
+                                                <span>{sala.sala.tipo}</span>
                                             </div>
                                         ))}
                                     </div>
@@ -234,13 +306,15 @@ const Details = () => {
                                     <div className='lugares-div'>
                                         <p className='Q-lugares'>{`${quantidade} Poltrona(s)`}</p>
                                         <div className='poltronas'>
-                                            <div>
-                                                <p>{`10`}</p>
-                                            </div>
-
-                                            <div>
-                                                <p>{`12`}</p>
-                                            </div>
+                                            {poltronas.length > 0 ? (
+                                                poltronas.map((poltrona, index) => (
+                                                    <div key={index}>
+                                                        <p>{poltrona}</p>
+                                                    </div>
+                                                ))
+                                            ) : (
+                                                <span>Nenhuma poltrona disponível</span>
+                                            )}
                                         </div>
                                     </div>
 
@@ -259,70 +333,24 @@ const Details = () => {
                                         </div>
                                     </div>
 
-                                    <Link to='/' className='link'>
-                                        <div className='continuar-compra'>
-                                            <div className='continuar-compra-bt' >
-                                                <p>
-                                                    Continuar
-                                                </p>
-                                            </div>
+                                    <div className='continuar-compra' onClick={FazerReserva}>
+                                        <div className='continuar-compra-bt' >
+                                            <p>
+                                                Continuar
+                                             </p>
                                         </div>
-                                    </Link>
+                                    </div>
 
                                 </div>
                             </div>
                         </div>
-                        {/* Modal */}
-                        {modalOpen && selectedSala && (
-                            <div className="modal-overlay" onClick={closeModal}>
-                                    <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-                                        <h2>Lugares da {selectedSala.sala.nome_sala}</h2>
-                                        <div className="container">
-                                            <div className="screen"></div>
-                                            <div className="rows-container">
-                                                {Array.from({ length: selectedSala.sala.quantidade_de_lugares / 8 }, (_, rowIndex) => (
-                                                    <div key={rowIndex} className="row">
-                                                        {Array.from({ length: 8 }, (_, seatIndex) => {
-                                                            const seatNumber = rowIndex * 8 + seatIndex + 1;
-                                                            const isOccupied = selectedSala.reservas.includes(seatNumber);
-                                                            const isSelected = false;
-                                                            let seatClass = 'seat';
-                                                            if (isOccupied) seatClass += ' occupied';
-                                                            if (isSelected) seatClass += ' selected';
-                                                            return (
-                                                                <div
-                                                                    key={seatIndex}
-                                                                    className={seatClass}
-                                                                    onClick={() => handleSeatClick(seatNumber)}
-                                                                >
-                                                                    {seatNumber}
-                                                                </div>
-                                                            );
-                                                        })}
-                                                    </div>
-                                                ))}
-                                            </div>
-                                            <div className="showcase">
-                                                <ul>
-                                                    <li>
-                                                        <div className="seat"></div>
-                                                        <small>Livre</small>
-                                                    </li>
-                                                    <li>
-                                                        <div className="seat selected"></div>
-                                                        <small className='selecionado' >Selecionado</small>
-                                                    </li>
-                                                    <li>
-                                                        <div className="seat occupied"></div>
-                                                        <small>Reservado</small>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <button onClick={closeModal}>Fechar</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            )}
+                        <ModalReserva modalOpen={modalOpen} 
+                            closeModal={closeModal} 
+                            selectedSala={Sala} 
+                            q={quantidade} 
+                            setPol={setPoltronas} 
+                            pol={poltronas} 
+                        />
                     </>
                 )
             }
@@ -331,4 +359,4 @@ const Details = () => {
     )
 }
 
-export default Details
+export default Reservas

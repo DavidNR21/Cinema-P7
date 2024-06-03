@@ -4,7 +4,6 @@ SELECT * FROM filmes
 SELECT * FROM salas
 SELECT * FROM reservas
 SELECT * FROM cidades
-SELECT * FROM client
 
 INSERT INTO Reservas (usuario_id, sala_id, filme_id, cidade_id, ingressos, horario, cadeiras)
 VALUES (1, 1, 1, 1, 2, '14:30', '12');
@@ -28,4 +27,4 @@ VALUES('Mike','Ross', 'ross.mike@hotmail.com','Houston'),
 ('Robert','Smith','smith.robert@hotmail.com','Dallas');  
  
   
-
+SELECT * from filmes where id = 'c58a9da0-fafd-486b-bb22-22e1cf746069'

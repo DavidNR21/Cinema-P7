@@ -13,11 +13,13 @@ def createCidades():
 
         nome = data['nome_cidade']
         cinema = data['cinema_nome']
+        propietario = data['propietario']
 
         
         Cidades.create(
             nome_cidade = nome,
-            cinema_nome = cinema
+            cinema_nome = cinema,
+            propietario = propietario
         )
 
 

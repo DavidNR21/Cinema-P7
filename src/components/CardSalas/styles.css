@@ -94,12 +94,12 @@
     cursor: pointer;
   }
   
-  .seat.selected {
+  .seat.selected-s {
     background-color: #fff;
     cursor: pointer;
   }
 
-  .selecionado {
+  .selecionado-s {
     color: #fff;
   }
   

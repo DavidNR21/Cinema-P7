@@ -76,8 +76,8 @@ const CardSalas = ({ salaArray }) => {
                                         <small>Livre</small>
                                     </li>
                                     <li>
-                                        <div className="seat selected"></div>
-                                        <small className='selecionado' >Selecionado</small>
+                                        <div className="seat selected-s"></div>
+                                        <small className='selecionado-s' >Selecionado</small>
                                     </li>
                                     <li>
                                         <div className="seat occupied"></div>

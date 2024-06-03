@@ -19,11 +19,11 @@ def addUser():
         sexo = data['sexo']
         telefone = data['celular']
         nascimento = data['nascimento']
+        #local = data['cidade']
 
         senha_criptografada = bcrypt.hashpw(senha.encode('utf-8'), bcrypt.gensalt())
 
         cpf_formatado = '{}.{}.{}-{}'.format(cpf[:3], cpf[3:6], cpf[6:9], cpf[9:])
-        print(cpf_formatado)
 
         Usuarios.create(
             nome = nome,
@@ -33,9 +33,9 @@ def addUser():
             celular = telefone,
             sexo = sexo,
             nascimento = nascimento,
-            isAdmin = False
+            isAdmin = False,
+            localidade = '-x-'
         )
-        #user.save()
 
         response = {
             "message": "Dados JSON recebidos e processados com sucesso",

@@ -1,11 +1,18 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'; // Importe o Link do react-router-dom
 import './Header.css'; // Importe o arquivo CSS
+
 
 function Header() {
 
   const [isLogin, setLogin] = useState(true)
-  
+
+  const getUserData = () => {
+    const userData = localStorage.getItem('userData');
+    return userData ? JSON.parse(userData) : null;
+  };
+
+
   return (
     <header className="header">
       <span className="logo">Cinema Ticket</span>

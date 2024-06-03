@@ -315,162 +315,48 @@ export default CardSalas;
 
 //////////////////////////////////////////////////////////////////////////////////
 
+<div className="modal-overlay-details" onClick={onClose}>
+            <div className="modal-content-details" onClick={(e) => e.stopPropagation()}>
+                <h2 className='modal-logo-details'>{movie.Nome}</h2>
 
+                <img src={movie.Img} alt={movie.Nome} className="modal-image-details" />
 
-.sala-item {
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.2);
-    overflow: hidden;
-}
-
-.sala-foto {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-}
-
-.sala-info {
-    padding: 20px;
-}
-
-.sala-info h3 {
-    margin-bottom: 10px;
-    font-size: 1.2rem;
-}
-
-.sala-info p {
-    margin: 5px 0;
-    font-size: 1rem;
-    font-weight: 500;
-}
-
-
-/*============================================*/
-
-git checkout develop
-git merge feature_screen_filme
-
-/* Estilos para o modal */
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.modal-content {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    max-width: 80%; /* Largura máxima */
-    width: calc(100% - 80px); /* Largura responsiva */
-    max-height: 90vh; /* Altura máxima */
-    overflow-y: auto; /* Adiciona rolagem vertical quando necessário */
-}
-
-/* Estilos para os lugares na sala */
-.lugares-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(30px, 1fr));
-    gap: 5px;
-    margin-top: 20px;
-}
-
-.lugar {
-    width: 30px;
-    height: 30px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.lugar.reservado {
-    background-color: var(--red);
-}
-
-.lugar.ocupado {
-    background-color: blue;
-}
-
-.lugar:hover {
-    background-color: lightblue;
-}
-
-.legend {
-    display: flex;
-    justify-content: center;
-    margin-top: 10px;
-}
-
-.legend > div {
-    width: 20px;
-    height: 20px;
-    margin-right: 5px;
-}
-
-.legend > span {
-    margin-right: 15px;
-}
-
-
-/////////////////////////////////////////////////////////////////////
-
-
-const salas = [
-        {
-            id: 1,
-            nome: 'Sala 1',
-            foto: 'https://ogimg.infoglobo.com.br/in/24308772-36d-ad0/FT1086A/86856180_RSSala-de-cinema-do-Kinoplex-Platinum-Rio-Sul-com-cadeiras-que-deitamFoto-Divulgacao-1.jpg',
-            lugares: 40,
-            tipo: '2D',
-            lugaresReservados: [1, 2, 3, 10]
-        },
-        {
-            id: 2,
-            nome: 'Sala 2',
-            foto: 'https://ogimg.infoglobo.com.br/in/24308772-36d-ad0/FT1086A/86856180_RSSala-de-cinema-do-Kinoplex-Platinum-Rio-Sul-com-cadeiras-que-deitamFoto-Divulgacao-1.jpg',
-            lugares: 48,
-            tipo: '3D',
-            lugaresReservados: [1, 2, 3, 10]
-        },
-        {
-            id: 3,
-            nome: 'Sala 3',
-            foto: 'https://veja.abril.com.br/wp-content/uploads/2016/10/cinema1.jpg?quality=90&strip=info&w=720&h=440&crop=1',
-            lugares: 56,
-            tipo: 'IMAX',
-            lugaresReservados: [1, 2, 3, 10]
-        }
-    ];
-
-
-/////////////////////////////////////////////////////////////////////
-
-<div className="login-container">
-            <h2 className="logo">Login</h2>
-            <form onSubmit={handleLogin}>
-                <div className="form-group">
-                    <label htmlFor="email">Email:</label>
-                    <input type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+                <p>{movie.sinopse}</p>
+                
+                <div className='modal-infos-details'>
+                    <p><strong>Gênero:</strong> {movie.genero}</p>
+                    <p><strong>Duração:</strong> {movie.Duracao}</p>
+                    <p><strong>Lançamento:</strong> {movie.Lancamento}</p>
                 </div>
-                <div className="form-group">
-                    <label htmlFor="senha">Senha:</label>
-                    <input type="password" id="senha" value={password} onChange={(e) => setPassword(e.target.value)} />
+
+                <div className="stars">
+                    {renderStars(movie.avaliacao)}
                 </div>
-                <p className="recuperar-link">Esqueceu a senha? <Link to="/recuperar-senha">Clique aqui</Link></p>
-                <button type="submit">{loading ? 'Carregando...' : 'Fazer Login'}</button>
-            </form>
-            <p className="cadastro-link">Ainda não possui uma conta? <Link to="/cadastro">Crie aqui</Link></p>
+
+                <button className='button-details' onClick={() => window.open(movie.Trailer || 'https://www.youtube.com/watch?v=dQw4w9WgXcQ', '_blank')}>
+                    Ver Trailer
+                </button>
+
+                <button className='button-details' onClick={onClose}>Fechar</button>
+            </div>
         </div>
 
+
+
+.modal-infos-details{
+    border: 1px solid green;
+}
+
+.button-details {
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 5px;
+    background-color: #007BFF;
+    color: white;
+    cursor: pointer;
+}
+  
+.button-details:hover {
+    background-color: #0056b3;
+}

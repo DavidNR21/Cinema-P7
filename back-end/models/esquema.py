@@ -24,6 +24,7 @@ class Usuarios(BaseModel, UserMixin):
     sexo = CharField(max_length=200)
     nascimento = DateField()
     isAdmin = BooleanField()
+    localidade = TextField()
     criadoEm = DateTimeField(constraints=[SQL('DEFAULT CURRENT_TIMESTAMP')])
 
     def to_json(self):
@@ -54,6 +55,7 @@ class Cidades(BaseModel):
     id = UUIDField(primary_key=True, default=uuid.uuid4)
     nome_cidade = CharField(max_length=100)
     cinema_nome = CharField(max_length=100)
+    propietario = TextField()
 
 
 class Filmes(BaseModel):
@@ -69,7 +71,7 @@ class Filmes(BaseModel):
 
 class Reservas(BaseModel):
     id = UUIDField(primary_key=True, default=uuid.uuid4)
-    usuario = ForeignKeyField(Usuarios, backref='reservas', on_delete='CASCADE')
+    usuario = TextField()
     sala = ForeignKeyField(Salas, backref='reservas', on_delete='CASCADE')
     filme = ForeignKeyField(Filmes, backref='reservas', on_delete='CASCADE')
     cidade = ForeignKeyField(Cidades, backref='reservas', on_delete='CASCADE')

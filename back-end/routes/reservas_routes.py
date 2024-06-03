@@ -16,24 +16,29 @@ def createReserva():
         usuario = data['nome_usuario']
         sala = data['nome_sala']
         filme = data['nome_filme']
-        cinema = data['nome_cidade']
+        cinema = data['nome_cinema']
         horario = data['horario']
         cadeiras = data['cadeiras']
+        ingressos = data['ingressos']
 
+        print(data)
 
-        Reservas.create(
-            usuario = Usuarios.select().where(Usuarios.nome == usuario).get(),
-            sala = Salas.select().where(Salas.nome_sala == sala).get(),
-            filme = Filmes.select().where(Filmes.nome_filme == filme).get(),
-            cidade = Cidades.select().where(Cidades.cinema_nome == 'Multicines').get(),
-            horario = horario,
-            cadeiras = cadeiras
-        )
+        for i in range(int(ingressos)):
+            print(f'ingresso {i}, cadeira: {cadeiras[i]}')
+
+            Reservas.create(
+                usuario = usuario,
+                sala = Salas.select().where(Salas.nome_sala == sala).get(),
+                filme = Filmes.select().where(Filmes.nome_filme == filme).get(),
+                cidade = Cidades.select().where(Cidades.cinema_nome == cinema).get(),
+                horario = horario,
+                cadeiras = cadeiras[i]
+            )
 
 
         response = {
             "message": "Dados JSON recebidos e processados com sucesso",
-            "data": cinema,
+            "data": data,
             "success" : True
         }
 
@@ -48,14 +53,14 @@ def createReserva():
     
 
 @reservas_bp.route('/', methods=['get'])
-def createReserva2():
+def getReservas():
     try:
-        filmes = Reservas.select()
+        reservas = Reservas.select()
 
         
-        filmes_dict = [model_to_dict(f) for f in filmes]
+        reservas_dict = [model_to_dict(f) for f in reservas]
 
-        return jsonify(filmes_dict), 200
+        return jsonify(reservas_dict), 200
 
 
     except Exception as e:
