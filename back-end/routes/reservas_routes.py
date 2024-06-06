@@ -20,6 +20,7 @@ def createReserva():
         horario = data['horario']
         cadeiras = data['cadeiras']
         ingressos = data['ingressos']
+        dia = data['dia']
 
         print(data)
 
@@ -32,7 +33,8 @@ def createReserva():
                 filme = Filmes.select().where(Filmes.nome_filme == filme).get(),
                 cidade = Cidades.select().where(Cidades.cinema_nome == cinema).get(),
                 horario = horario,
-                cadeiras = cadeiras[i]
+                cadeiras = cadeiras[i],
+                dia = dia
             )
 
 
@@ -62,9 +64,22 @@ def getReservas():
 
         return jsonify(reservas_dict), 200
 
-
     except Exception as e:
         error_message = {"error": str(e)}
         print("Erro:", e)
         return jsonify(error_message), 400
 
+
+@reservas_bp.route('/all/<string:nome>', methods=['get'])
+def getReservas_user(nome):
+    try:
+        reservas = Reservas.select().where(Reservas.usuario == nome)
+        
+        reservas_dict = [model_to_dict(f) for f in reservas]
+
+        return jsonify(reservas_dict), 200
+
+    except Exception as e:
+        error_message = {"error": str(e)}
+        print("Erro:", e)
+        return jsonify(error_message), 400

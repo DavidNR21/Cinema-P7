@@ -5,12 +5,20 @@ import './Header.css'; // Importe o arquivo CSS
 
 function Header() {
 
-  const [isLogin, setLogin] = useState(true)
+  const [isLogin, setLogin] = useState(false)
 
   const getUserData = () => {
     const userData = localStorage.getItem('userData');
     return userData ? JSON.parse(userData) : null;
   };
+
+  useEffect(() => {
+    const userData = getUserData()
+
+    if(userData != null){
+      setLogin(true)
+    }
+  },[])
 
 
   return (
@@ -27,7 +35,7 @@ function Header() {
         <Link to = "/" >Filmes</Link>
         <Link to = "/Salas">Salas</Link>
         {
-          isLogin ? (
+          !isLogin ? (
             <>
               <Link to = "/Login">Login</Link>
               <Link to = "/Cadastro">Registrar</Link>

@@ -74,3 +74,55 @@ export const buscar_Filmes_Detalhes = async (n) => {
     }
 };
 
+
+
+export const atualizar_usuario = async (id, data) => {
+    try {
+        const response = await fetch(`http://127.0.0.1:5000/user/update/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+
+        if (!response.ok) {
+            throw new Error('Erro ao atualizar usuário');
+        }
+
+        const json = await response.json();
+        const status = response.status;
+
+        return { status: status, data: json };
+        
+    } catch (error) {
+        console.error('Erro ao enviar requisição:', error);
+        return { error: error.message };
+    }
+};
+
+
+export const buscar_reservas_por_usuario = async (nome) => {
+    try {
+        const response = await fetch(`http://127.0.0.1:5000/reservas/all/${nome}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error('Erro ao buscar reservas');
+        }
+
+        const json = await response.json();
+        const status = response.status;
+
+        return { status: status, data: json };
+        
+    } catch (error) {
+        console.error('Erro ao enviar requisição:', error);
+        return { error: error.message };
+    }
+};
+

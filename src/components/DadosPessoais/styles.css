@@ -1,0 +1,41 @@
+
+.profile-main section {
+    margin-bottom: 2rem;
+}
+
+.dados-pessoais-section {
+    border: 1px solid #808080;
+    padding: 1rem;
+    margin-bottom: .8rem;
+}
+
+.dados-item {
+    margin-bottom: 0.5rem;
+}
+
+.dados-item label {
+    font-weight: bold;
+    display: block;
+    color: #1A282D;
+}
+
+.dados-item p {
+    margin: 0;
+    padding: 0.2rem 0;
+}
+
+.res-button {
+    width: 30%;
+    padding: 0.75rem;
+    border: none;
+    border-radius: 4px;
+    background-color: #050505;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.res-button:hover {
+    background-color: #313131;
+}

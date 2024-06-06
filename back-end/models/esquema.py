@@ -77,6 +77,7 @@ class Reservas(BaseModel):
     cidade = ForeignKeyField(Cidades, backref='reservas', on_delete='CASCADE')
     horario = CharField(max_length=100)
     cadeiras = CharField(max_length=200)
+    dia = TextField()
 
 
 

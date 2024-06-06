@@ -53,7 +53,7 @@ def addUser():
     
 
 
-@add_bp.route('/<int:id>', methods=['GET'])  # pegar informações
+@add_bp.route('/<string:id>', methods=['GET'])  # pegar informações
 def readUser(id):
     try:
         user = Usuarios.get_by_id(id)
@@ -82,20 +82,36 @@ def readUser(id):
 
 
 
-@add_bp.route('/update/<int:id>', methods=['PUT']) # atualizar pelo id
+@add_bp.route('/update/<string:id>', methods=['PUT'])
 def updateUser(id):
     try:
         data = request.get_json()
 
-        query = Usuarios.update(**data).where(Usuarios.id == id)
+        input = data['metodo']
 
-        query.execute()
+        if input == 'senha':
 
-        user = Usuarios.get_by_id(id)
+            del data['metodo']
+
+            senha_up = data['senha']
+
+            senha_criptografada = bcrypt.hashpw(senha_up.encode('utf-8'), bcrypt.gensalt())
+
+            data['senha'] = senha_criptografada
+
+            query = Usuarios.update(**data).where(Usuarios.id == id)
+
+            query.execute()
+
+            user = Usuarios.get_by_id(id)
+
+        else:
+            print('outro metodo')
+
 
         response = {
             "message": f"Usuário com ID: {id} foi atualizado com sucesso.",
-            "dados_enviados": [user.to_json()]
+            "data": user.to_json()
         }
 
         return jsonify(response), 200
@@ -111,7 +127,7 @@ def updateUser(id):
 
 
 
-@add_bp.route('/delete/<int:id>', methods=['DELETE']) # deletar pelo id
+@add_bp.route('/delete/<string:id>', methods=['DELETE']) # deletar pelo id
 def deleteUser(id):
     try:
         user_delete = Usuarios.get(Usuarios.id == id)

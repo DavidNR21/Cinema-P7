@@ -1,6 +1,7 @@
 from flask import Blueprint, request, jsonify
 from models.esquema import *
 from playhouse.shortcuts import model_to_dict
+from datetime import datetime
 
 
 sala_bp = Blueprint('sala',__name__)
@@ -99,6 +100,36 @@ def get_salas_e_reservas_por_cinemav2(nome_cinema):
         
         for sala in Salas.select().where(Salas.cinema_nome == nome_cinema):
             reservas_sala = Reservas.select().where(Reservas.sala == sala)
+            cadeiras_reservadas = [json.loads(reserva.cadeiras) for reserva in reservas_sala]
+            salas_com_reservas.append({
+                "sala": model_to_dict(sala),
+                "reservas": cadeiras_reservadas
+            })
+
+        return jsonify(salas_com_reservas), 200
+
+    except Exception as e:
+        error_message = {"error": str(e)}
+        print("Erro:", e)
+        return jsonify(error_message), 400
+    
+
+@sala_bp.route('/v3/<string:nome_cinema>', methods=['GET'])
+def get_salas_e_reservas_por_cinemav3(nome_cinema):
+    try:
+
+        today = datetime.now().strftime('%d/%b/%Y').lower()
+        
+        salas_com_reservas = []
+        
+        for sala in Salas.select().where(Salas.cinema_nome == nome_cinema):
+            if today:
+                reservas_sala = Reservas.select().where(
+                    (Reservas.sala == sala) & (Reservas.dia == today)
+                )
+            else:
+                reservas_sala = Reservas.select().where(Reservas.sala == sala)
+            
             cadeiras_reservadas = [json.loads(reserva.cadeiras) for reserva in reservas_sala]
             salas_com_reservas.append({
                 "sala": model_to_dict(sala),

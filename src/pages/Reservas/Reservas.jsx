@@ -133,7 +133,8 @@ const Reservas = () => {
                     nome_cinema : dados[0]['cidades'][0]['cinema_nome'],
                     horario : selectedHorarios,
                     cadeiras : poltronas,
-                    ingressos : quantidade
+                    ingressos : quantidade,
+                    dia : DataEscolhida
                 }
     
                 console.log(DATA)
