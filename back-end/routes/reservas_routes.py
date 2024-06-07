@@ -21,6 +21,7 @@ def createReserva():
         cadeiras = data['cadeiras']
         ingressos = data['ingressos']
         dia = data['dia']
+        idSala = data['id_sala']
 
         print(data)
 
@@ -29,7 +30,7 @@ def createReserva():
 
             Reservas.create(
                 usuario = usuario,
-                sala = Salas.select().where(Salas.nome_sala == sala).get(),
+                sala = Salas.get(Salas.id == idSala),
                 filme = Filmes.select().where(Filmes.nome_filme == filme).get(),
                 cidade = Cidades.select().where(Cidades.cinema_nome == cinema).get(),
                 horario = horario,

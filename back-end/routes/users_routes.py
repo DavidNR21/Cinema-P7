@@ -89,6 +89,17 @@ def updateUser(id):
 
         input = data['metodo']
 
+        if data['state'] == 'login':
+            id = Usuarios.select().where(Usuarios.email == data['email']).get()
+            print(id)
+            del data['state']
+            del data['email']
+        else:
+            del data['state']
+            del data['email']
+
+        print(data)
+
         if input == 'senha':
 
             del data['metodo']
