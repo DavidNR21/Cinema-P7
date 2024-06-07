@@ -4,6 +4,7 @@ import './styles.css'
 import DadosPessoais from '../../components/DadosPessoais/DadosPessoais';
 import MeusIngressos from '../../components/MeusIngressos/MeusIngressos';
 import { buscar_reservas_por_usuario } from '../../data/apis';
+import PainelAdmin from '../../components/PainelAdmin/PainelAdmin';
 
 
 function Perfil (){
@@ -48,12 +49,9 @@ function Perfil (){
                 return (
                     <MeusIngressos dados={ingressos} />
                 )
-            case 'historico':
+            case 'adm':
                 return (
-                    <section id="historico">
-                        <h2>Histórico</h2>
-                        <p>Veja seu histórico de atividades.</p>
-                    </section>
+                    <PainelAdmin dados={DATA}/>
                 )
             default:
                 return null;
@@ -64,7 +62,7 @@ function Perfil (){
         const userData = getUserData()
 
         setUsername(userData['nome'])
-        setIsAdmin(useState['admin'])
+        setIsAdmin(userData['admin'])
         setDATA(userData)
 
         ingressos_user(userData['nome'])
@@ -79,7 +77,7 @@ function Perfil (){
                         <span className='op' onClick={() => setVisibleSection('meus dados')}>Dados pessoais</span>
                         <span className='op' onClick={() => setVisibleSection('meusIngressos')}>Meus ingressos</span>
                         {
-                            !isAdmin ? <span className='op'>Meu Cinema</span> : ''
+                            isAdmin ? <span className='op' onClick={() => setVisibleSection('adm')}>Meu Cinema</span> : ''
                         }
                         <span className='op' onClick={handleHome}>Home</span>
                         <span className='op' onClick={handleLogout}>Logout</span>

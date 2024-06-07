@@ -1,0 +1,51 @@
+
+.adm-container {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+}
+
+.adm-section {
+    border: 1px solid red;
+    padding: 1rem;
+    margin-bottom: .8rem;
+    width: 100%;
+    height: 100%;
+}
+
+.adm-item-infos {
+    width: 65%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.adm-item-modals {
+    border: 1px solid #808080;
+    width: 35%;
+    display: flex;
+    flex-direction: column;
+}
+
+.adm-card {
+    border: 1px solid #ccc;
+    padding: 1rem;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 390px;
+    max-height: 170px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.adm-modals {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
