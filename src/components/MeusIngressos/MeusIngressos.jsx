@@ -1,7 +1,37 @@
-
+import { toast } from 'react-toastify';
 import './styles.css'
 
+
 function MeusIngressos ({ dados }){
+
+    const handleDownload = async (reservaId) => {
+        try {
+            const response = await fetch(`http://127.0.0.1:5000/reservas/v2/gerar/${reservaId}`, {
+                method: 'GET',
+                headers: {
+                'Content-Type': 'application/pdf',
+                },
+            });
+      
+            if (!response.ok) {
+                throw new Error('Erro ao baixar o PDF');
+            }
+      
+            const url = response.url; // URL direta da resposta
+
+            const link = document.createElement('a');
+            link.href = url;
+            link.setAttribute('download', 'ingresso.pdf'); // Nome do arquivo
+            document.body.appendChild(link);
+            link.click();
+            link.remove();
+
+            toast.success('PDF baixado com sucesso!');
+        } catch (error) {
+          console.error('Erro ao baixar o PDF:', error);
+          toast.error('Erro ao baixar o PDF');
+        }
+    };
 
 
     return(
@@ -25,10 +55,7 @@ function MeusIngressos ({ dados }){
                                     <p>Data: {ingresso.dia}</p>
                                 </div>
                             <div className="ingresso-actions">
-                                <button className="action-button">
-                                    <i className="bx bx-info-circle" id='ingresso-icon'></i>
-                                </button>
-                                <button className="action-button">
+                                <button className="action-button" onClick={() => handleDownload(ingresso.id)}>
                                     <i className="bx bx-download" id='ingresso-icon'></i>
                                 </button>
                             </div>

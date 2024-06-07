@@ -19,7 +19,8 @@ def addUser():
         sexo = data['sexo']
         telefone = data['celular']
         nascimento = data['nascimento']
-        #local = data['cidade']
+        local = data['cidade']
+        adm = data['proprietario']
 
         senha_criptografada = bcrypt.hashpw(senha.encode('utf-8'), bcrypt.gensalt())
 
@@ -33,8 +34,8 @@ def addUser():
             celular = telefone,
             sexo = sexo,
             nascimento = nascimento,
-            isAdmin = False,
-            localidade = '-x-'
+            isAdmin = adm,
+            localidade = local
         )
 
         response = {

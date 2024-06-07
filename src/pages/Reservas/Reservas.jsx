@@ -289,7 +289,9 @@ const Reservas = () => {
                                             {dados[0]?.cidades.map((cidade, index) => (
                                                 <span key={index}>{cidade.nome_cidade}</span>
                                             ))}
-                                            <span>Rua endereço num</span>
+                                            {dados[0]?.cidades.map((cidade, index) => (
+                                                <span key={index}>{cidade.rua}</span>
+                                            ))}
                                         </div>
                                     </div>
                                 </div>

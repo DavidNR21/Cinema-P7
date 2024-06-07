@@ -16,7 +16,7 @@ app = Flask(__name__)
 #CORS(app, resources={r"/cidades/*": {"origins": "*", "supports_credentials": True}})
 #CORS(app, supports_credentials=True)
 
-CORS(app, origins='*')
+CORS(app)
 
 
 app.config['JSON_SORT_KEYS'] = False
@@ -43,25 +43,29 @@ def index():
     cidade_data = {
         "cinema_nome": "Cine-Guedes",
         "nome_cidade": "Patos-PB",
-        "propietario" : "A"
+        "propietario" : "A",
+        "rua" : "Rua pedro firmino 1"
     }
 
     cidade_data2 = {
         "cinema_nome": "Multicines",
         "nome_cidade": "Patos-PB",
-        "propietario" : "B"
+        "propietario" : "B",
+        "rua" : "Rua pedro firmino 2"
     }
 
     cidade_data3 = {
         "cinema_nome": "ManairaShopping",
         "nome_cidade": "Joao Pessoa-PB",
-        "propietario" : "C"
+        "propietario" : "C",
+        "rua" : "Rua pedro firmino 3"
     }
 
     cidade_data4 = {
         "cinema_nome": "PartagemShopping",
         "nome_cidade": "Campina Grande-PB",
-        "propietario" : "D"
+        "propietario" : "D",
+        "rua" : "Rua pedro firmino 4"
     }
 
     Cidades.create(**cidade_data)
@@ -94,7 +98,7 @@ def index():
     sala_data3 = {
         "cinema_nome": "ManairaShopping",
         "img_sala": "https://veja.abril.com.br/wp-content/uploads/2016/10/cinema1.jpg?quality=90&strip=info&w=720&h=440&crop=1",
-        "nome_sala": "Sala 1",
+        "nome_sala": "Sala 2",
         "quantidade_de_lugares": 56,
         "tipo": "3D"
     }
@@ -105,6 +109,14 @@ def index():
         "nome_sala": "Sala 1",
         "quantidade_de_lugares": 56,
         "tipo": "IMAX"
+    }
+
+    sala_data7 = {
+        "cinema_nome": "Multicines",
+        "img_sala": "https://veja.abril.com.br/wp-content/uploads/2016/10/cinema1.jpg?quality=90&strip=info&w=720&h=440&crop=1",
+        "nome_sala": "Sala 2",
+        "quantidade_de_lugares": 48,
+        "tipo": "3D"
     }
 
     sala_data5 = {
@@ -123,6 +135,14 @@ def index():
         "tipo": "3D"
     }
 
+    sala_data8 = {
+        "cinema_nome": "PartagemShopping",
+        "img_sala": "https://veja.abril.com.br/wp-content/uploads/2016/10/cinema1.jpg?quality=90&strip=info&w=720&h=440&crop=1",
+        "nome_sala": "Sala 2",
+        "quantidade_de_lugares": 56,
+        "tipo": "IMAX"
+    }
+
     Salas.create(**sala_data)
 
     Salas.create(**sala_data2)
@@ -134,6 +154,10 @@ def index():
     Salas.create(**sala_data5)
 
     Salas.create(**sala_data6)
+
+    Salas.create(**sala_data7)
+
+    Salas.create(**sala_data8)
 
     time.sleep(1)
 

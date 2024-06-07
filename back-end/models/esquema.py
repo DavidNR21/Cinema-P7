@@ -56,6 +56,7 @@ class Cidades(BaseModel):
     nome_cidade = CharField(max_length=100)
     cinema_nome = CharField(max_length=100)
     propietario = TextField()
+    rua = TextField()
 
 
 class Filmes(BaseModel):
