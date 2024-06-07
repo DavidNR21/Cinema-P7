@@ -15,8 +15,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 2.5rem;
-    height: 2.5rem;
+    width: 2.6rem;
+    height: 2.6rem;
     background-color: #1A282D;
     border-radius: 100%;
     z-index: 99;
@@ -134,16 +134,23 @@ input[type='number'] {
     padding: 20px;
 }
 
-
 .horario-item {
     display: flex;
     flex-direction: row;
-    width: 80px;
+    align-items: center;  /* Alinha verticalmente o checkbox e o texto */
+    width: 100px;  /* Aumentei um pouco a largura para acomodar o texto maior */
+    margin: 5px;  /* Adicionei margem para espaçamento entre os itens */
 }
 
+.horario-item input[type="checkbox"] {
+    width: 20px;  /* Aumenta a largura do checkbox */
+    height: 20px;  /* Aumenta a altura do checkbox */
+    margin-right: 10px;  /* Espaçamento entre o checkbox e o texto */
+}
 
-.H {
+.horario-item .H {
     color: #050505;
+    font-size: 18px;  /* Aumenta o tamanho da fonte do texto */
 }
 
 

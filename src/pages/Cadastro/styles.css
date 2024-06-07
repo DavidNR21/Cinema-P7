@@ -1,46 +1,94 @@
-.container {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 1rem;
-  }
-  
+
+.cad-div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100vh;
+}
+
+.container-cad {
+  width: 700px;
+  height: 90%;
+  padding: 15px;
+  background-color: #f5f5f5;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+}
+
+.title-cad {
+  text-align: center;
+  font-size: 1.7rem;
+  margin-top: 30px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.form-group-cad {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.label-cad {
+  display: block;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+#nome, #email, #senha, #cpf, #celular, #nascimento, #sexo, #cidade {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+#proprietario {
+  margin-right: 10px;
+  width: 2rem;
+}
+
+.checkbox-cad {
+  display: flex;
+  align-items: center;
+  margin-top: 25px;
+  margin-bottom: 10px;
+}
+
+.label-cad-prop {
+  display: block;
+  color: #333;
+}
+
+
+.but-div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-top: 15px;
+}
+
+
+.submit-button {
+  width: 95%;
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  background-color: #050505;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.submit-button:hover {
+  background-color: #313131;
+}
+
+@media (max-width: 600px) {
   .form-group-cad {
-    margin-bottom: 0.4rem;
+      grid-template-columns: 1fr;
   }
-  
-  .label-cad {
-    display: block;
-    font-weight: bold;
-    color: #050505;
-  }
-  
-  input[type='text'],
-  input[type='email'],
-  input[type='password'],
-  input[type='date'],
-  input[type='checkbox'] {
-    width: 100%;
-    padding: 0.5rem;
-    font-size: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-  }
-  
-  button {
-    display: block;
-    width: 100%;
-    padding: 0.5rem 1rem;
-    margin-top: 1rem;
-    font-size: 1rem;
-    background-color: var(--primary); /*#007bff;*/
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  button:hover {
-    background-color: var(--secondary)/*#0056b3;*/
-  }
-  
+}

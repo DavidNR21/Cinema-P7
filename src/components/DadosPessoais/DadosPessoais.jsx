@@ -36,7 +36,7 @@ function DadosPessoais ({ dados }){
                     <label>Celular:</label>
                     <p>{dados.celular}</p>
                 </div>
-                <button type="submit" className="res-button" onClick={() => navigation('/Redefinir')} >
+                <button type="submit" className="res-button" onClick={() => navigation('/Redefinir/linkado')} >
                     Redefinir Senha
                 </button>
             </div>

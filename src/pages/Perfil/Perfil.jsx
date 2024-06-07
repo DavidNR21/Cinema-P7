@@ -33,7 +33,7 @@ function Perfil (){
 
     const handleLogout = () => {
         localStorage.removeItem('userData')
-        navigation('/login')
+        navigation('/')
     };
 
 

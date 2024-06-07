@@ -1,14 +1,19 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react';
 import './styles.css';
 import { atualizar_usuario } from '../../data/apis';
+import { useParams } from 'react-router-dom';
 
 
 function RedefinirSenha() {
 
     const [password, setPassword] = useState('')
+    const [email, setEmail] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
     const [message, setMessage] = useState('')
+    const [userId, setUserId] = useState('')
     const [DATA, setDATA] = useState({})
+    const parametros = useParams()
 
 
     const handleSubmit = (e) => {
@@ -21,10 +26,14 @@ function RedefinirSenha() {
 
         const updateData = {
             metodo: 'senha',
-            senha: password
+            senha: password,
+            state : parametros.state,
+            email : email
         };
 
-        atualizar_usuario(DATA['id'], updateData).then(response => {
+        const userIdToUpdate = DATA.length === 0 ? userId : DATA['id'];
+
+        atualizar_usuario(userIdToUpdate, updateData).then(response => {
             if (response.error) {
                 console.error(response.error);
             } else {
@@ -45,7 +54,15 @@ function RedefinirSenha() {
     useEffect(() => {
         const userData = getUserData()
 
-        setDATA(userData)
+        if (userData != null){
+            setDATA(userData)
+            setUserId(userData['id'])
+        }
+        else{
+            setUserId('-x-')
+        }
+        console.log(parametros.state)
+
     },[])
 
     return (
@@ -54,6 +71,16 @@ function RedefinirSenha() {
                 <h2>Redefinir Senha</h2>
                 <p className="reset-text">Insira e confirme sua nova senha abaixo.</p>
                 <form onSubmit={handleSubmit}>
+                    {parametros.state == 'login' ? (
+                        <>
+                            <div className="input-group-red">
+                                <label htmlFor="password">Email:</label>
+                                <input type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+                            </div>
+                        </>
+                    ) : (
+                        <></>
+                    )}
                     <div className="input-group-red">
                         <label htmlFor="password">Nova Senha</label>
                         <input

@@ -1,362 +1,179 @@
-import React from 'react';
-import { Link } from 'react-router-dom'; // Importe o Link do react-router-dom
-import './Header.css'; // Importe o arquivo CSS
 
-function Header() {
+import { useState, useContext } from 'react';
+import { toast } from 'react-toastify';
+import { CinemaContext } from '../../context/CinemaContext';
+import 'react-toastify/dist/ReactToastify.css';
+import './styles.css';
+
+
+function Cadastro() {
+  
+  const { count, incrementCount } = useContext(CinemaContext)
+  const [nome, setNome] = useState('');
+  const [email, setEmail] = useState('');
+  const [cpf, setCpf] = useState('');
+  const [senha, setSenha] = useState('');
+  const [celular, setCelular] = useState('');
+  const [sexo, setSexo] = useState('');
+  const [nascimento, setNascimento] = useState('');
+
+
+  const fetchUsuario = async (dados) => {
+
+    if (senha.length < 6){
+      toast.error('senha deve possuir mais de 6 caracteres');
+    }
+    else{
+      try {
+        const response = await fetch('http://127.0.0.1:5000/user/add', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(dados)
+        });
+        
+        if (!response.ok) {
+            throw new Error('Erro ao cadastrar usuário');
+        }
+
+        const data = await response.json();
+
+        toast.success('Usuário cadastrado com sucesso!');
+
+        setNome('')
+        setEmail('')
+        setSenha('')
+        setCpf('')
+        setCelular('')
+        setSexo('')
+        setNascimento('')
+
+        return data;
+
+    } catch (error) {
+        console.error('Erro ao enviar requisição:', error);
+
+        toast.error('Erro ao cadastrar usuário');
+
+        throw error;
+      }
+    }
+  };
+
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const formData = {
+        nome: nome,
+        email: email,
+        cpf: cpf,
+        senha: senha,
+        celular: celular,
+        sexo: sexo,
+        nascimento: nascimento
+    };
+
+    console.log(count)
+    incrementCount()
+
+    try {
+        const response = await fetchUsuario(formData);
+        console.log('Usuário cadastrado com sucesso:', response);
+        
+    } catch (error) {
+        console.error('Erro ao cadastrar usuário:', error);
+    }
+
+  };
+
+
   return (
-    <header className="header">
-      <Link to="/" className="logo">Cloud Filmes</Link>
-
-      <input type="checkbox" id="check" />
-      <label htmlFor="check" className="icons">
-        <i className='bx bx-menu' id="menu-icon"></i>
-        <i className='bx bx-x' id="close-icon"></i>
-      </label>
-
-      <nav className="navbar">
-        <Link to="/search">Search</Link>
-        <Link to="/filmes">Filmes</Link>
-        <Link to="/series">Series</Link>
-        <Link to="/animes">Animes</Link>
-      </nav>
-    </header>
+    <div className="container">
+      <form onSubmit={handleSubmit}>
+        <div className="form-group-cad">
+          <label className='label-cad' htmlFor="nome">Nome:</label>
+          <input type="text" id="nome" value={nome} onChange={(e) => setNome(e.target.value)} />
+        </div>
+        <div className="form-group-cad">
+          <label className='label-cad' htmlFor="email">Email:</label>
+          <input type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+        </div>
+        <div className="form-group-cad">
+          <label className='label-cad' htmlFor="cpf">CPF:</label>
+          <input type="text" id="cpf" value={cpf} onChange={(e) => setCpf(e.target.value)} />
+        </div>
+        <div className="form-group-cad">
+          <label className='label-cad' htmlFor="senha">Senha:</label>
+          <input type="password" id="senha" value={senha} onChange={(e) => setSenha(e.target.value)} />
+        </div>
+        <div className="form-group-cad">
+          <label className='label-cad' htmlFor="celular">Celular:</label>
+          <input type="text" id="celular" value={celular} onChange={(e) => setCelular(e.target.value)} />
+        </div>
+        <div className="form-group-cad">
+          <label className='label-cad' htmlFor="sexo">Sexo:</label>
+          <input type="text" id="sexo" value={sexo} onChange={(e) => setSexo(e.target.value)} />
+        </div>
+        <div className="form-group-cad">
+          <label className='label-cad' htmlFor="nascimento">Nascimento:</label>
+          <input type="date" id="nascimento" value={nascimento} onChange={(e) => setNascimento(e.target.value)} />
+        </div>
+        <button type="submit">Fazer Cadastro</button>
+      </form>
+    </div>
   );
 }
 
-export default Header;
-
-
-
-
-
-
-
-//import { useState } from 'react'
-import { Link } from 'react-router-dom'
-import './Header.css'
-
-
-function Header(){
-
-    return (
-        <header className="header" >
-            <span>Cinema Ticket</span>
-            <nav className = "navbar">
-                <Link to = "/" >Filmes</Link>
-                <Link to = "/Salas">Salas</Link>
-                <Link to = "/Login">Login</Link>
-                <Link to = "/Cadastro">Registrar</Link>
-            </nav>
-
-            <input type="checkbox" id="check" />
-            <label htmlFor="check" className="icons">
-                <i className='bx bx-menu' id="menu-icon"></i>
-                <i className='bx bx-x' id="close-icon"></i>
-            </label>
-        </header>
-    )
-}
-
-
-export default Header
-
-
-
-
-//////////////////////////////////////////////////////////////////////////////////
-
+export default Cadastro;
 
 
 
 .container {
-    margin-top: 80px;
-    width: 45%;
-}
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 1rem;
+  }
   
-.diasContainer {
-    margin-left: 5px;
-    display: flex;
-    justify-content:space-between;
-}
+  .form-group-cad {
+    margin-bottom: 0.4rem;
+  }
   
-.dia {
-    border: 1px solid #ccc;
-    margin-right: 10px;
-    padding: 10px;
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100px;
-    height: 90px;
-}
-  
-.dia:hover {
-    background-color: #f0f0f0;
-}
-  
-.selected {
-    background-color: #50125D;
-    color: #fff;
-}
-
-  
-.sub {
-    margin-left: 10;
-}
-
-
-
-<div className="container">
-                    <h2 className="sub">Escolha um dia para assistir um filme</h2>
-                    <div className="diasContainer">
-                        {diasSemana.map((dia, index) => (
-                            <div
-                                key={index}
-                                className={`dia ${selectedDay === index ? 'selected' : ''}`}
-                                onClick={() => handleDayClick(index)}
-                            >
-                                <span>{dia}</span>
-                                <span>{index + 1}</span>
-                                <span>Abr</span>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-
-
-
-/////////////////////////////////////////////////////////
-
-
-
-
-
-
-.container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1rem;
-}
-  
-.form-group {
-    margin-bottom: 1rem;
-    margin-left: 5px;
-    margin-right: 5px;
-    border: 1px solid blue;
-}
-  
-label {
+  .label-cad {
     display: block;
     font-weight: bold;
-}
+    color: #050505;
+  }
   
-input[type='text'],
-input[type='email'],
-input[type='password'],
-input[type='date'],
-input[type='checkbox'] {
-    width: 50%;
+  input[type='text'],
+  input[type='email'],
+  input[type='password'],
+  input[type='date'],
+  input[type='checkbox'] {
+    width: 100%;
     padding: 0.5rem;
     font-size: 1rem;
     border: 1px solid #ccc;
     border-radius: 4px;
-}
+    box-sizing: border-box;
+  }
   
-button {
+  button {
+    display: block;
+    width: 100%;
     padding: 0.5rem 1rem;
+    margin-top: 1rem;
     font-size: 1rem;
-    background-color: #007bff;
+    background-color: var(--primary); /*#007bff;*/
     color: #fff;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    margin-left: 5px;
-}
+  }
   
-button:hover {
-    background-color: #0056b3;
-}
+  button:hover {
+    background-color: var(--secondary)/*#0056b3;*/
+  }
   
 
-
-///////////////////////////////////////////////////////////////////////
-
-
-
-import Header from "../../components/Header/Header";
-import './styles.css'
-
-
-
-function Salas (){
-
-
-    return(
-        <div className = "container-salas">
-            <Header />
-            <div className = "container-principal">
-                <div className = "div-logo" >
-                    <h3 className="subtitle">
-                        Salas Disponivel Para Filmes
-                    </h3>
-                </div>
-
-                <div className = "card-salas">
-                    <h3>
-                        ola
-                    </h3>
-                </div>
-            </div>
-        </div>
-    )
-}
-
-
-export default Salas
-
-
-////////////////////////////////////////////////////////////////////////
-
-import { useState } from 'react';
-import './styles.css';
-
-
-const CardSalas = () => {
-
-    const [modalOpen, setModalOpen] = useState(false);
-    const [selectedSala, setSelectedSala] = useState(null);
-
-    const salas = [
-        {
-            id: 1,
-            nome: 'Sala 1',
-            foto: 'https://ogimg.infoglobo.com.br/in/24308772-36d-ad0/FT1086A/86856180_RSSala-de-cinema-do-Kinoplex-Platinum-Rio-Sul-com-cadeiras-que-deitamFoto-Divulgacao-1.jpg',
-            lugares: 40,
-            tipo: '2D',
-            lugaresReservados: [1, 2, 3, 10]
-        },
-        {
-            id: 2,
-            nome: 'Sala 2',
-            foto: 'https://ogimg.infoglobo.com.br/in/24308772-36d-ad0/FT1086A/86856180_RSSala-de-cinema-do-Kinoplex-Platinum-Rio-Sul-com-cadeiras-que-deitamFoto-Divulgacao-1.jpg',
-            lugares: 50,
-            tipo: '3D',
-            lugaresReservados: [1, 2, 3, 10]
-        },
-        {
-            id: 3,
-            nome: 'Sala 3',
-            foto: 'https://veja.abril.com.br/wp-content/uploads/2016/10/cinema1.jpg?quality=90&strip=info&w=720&h=440&crop=1',
-            lugares: 60,
-            tipo: 'IMAX',
-            lugaresReservados: [1, 2, 3, 10]
-        }
-    ];
-
-
-    const handleSalaClick = (sala) => {
-        setSelectedSala(sala);
-        setModalOpen(true);
-    };
-
-    const closeModal = () => {
-        setModalOpen(false);
-    };
-
-
-    return (
-        <>
-            {salas.map(sala => (
-                <div key={sala.id} className="sala-item" onClick={() => handleSalaClick(sala)}>
-                    <img src={sala.foto} alt={sala.nome} className="sala-foto" />
-                    <div className="sala-info">
-                        <h3>{sala.nome}</h3>
-                        <p>Lugares: {sala.lugares}</p>
-                        <p>{sala.tipo}</p>
-                    </div>
-                </div>
-            ))}
-
-            {/* Modal */}
-            {modalOpen && selectedSala && (
-                <div className="modal-overlay" onClick={closeModal}>
-                    <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-                        <h2>Lugares da {selectedSala.nome}</h2>
-                        <div className="lugares-container">
-                            {Array.from({ length: selectedSala.lugares }, (_, index) => (
-                                <div
-                                    key={index + 1}
-                                    className={`lugar ${selectedSala.lugaresReservados.includes(index + 1) ? 'reservado' : ''}`}
-                                >
-                                    {index + 1}
-                                </div>
-                            ))}
-                        </div>
-                        <div className="legend">
-                            <div className="occupied"></div>
-                            <span>Ocupado - Azul</span>
-                            <div className="available"></div>
-                            <span>Livre - Branco</span>
-                            <div className="reserved"></div>
-                            <span>Reservado - Cinza</span>
-                        </div>
-                        <button onClick={closeModal}>Fechar</button>
-                    </div>
-                </div>
-            )}
-
-        </>
-    );
-}
-
-export default CardSalas;
-
-
-//////////////////////////////////////////////////////////////////////////////////
-
-<div className="modal-overlay-details" onClick={onClose}>
-            <div className="modal-content-details" onClick={(e) => e.stopPropagation()}>
-                <h2 className='modal-logo-details'>{movie.Nome}</h2>
-
-                <img src={movie.Img} alt={movie.Nome} className="modal-image-details" />
-
-                <p>{movie.sinopse}</p>
-                
-                <div className='modal-infos-details'>
-                    <p><strong>Gênero:</strong> {movie.genero}</p>
-                    <p><strong>Duração:</strong> {movie.Duracao}</p>
-                    <p><strong>Lançamento:</strong> {movie.Lancamento}</p>
-                </div>
-
-                <div className="stars">
-                    {renderStars(movie.avaliacao)}
-                </div>
-
-                <button className='button-details' onClick={() => window.open(movie.Trailer || 'https://www.youtube.com/watch?v=dQw4w9WgXcQ', '_blank')}>
-                    Ver Trailer
-                </button>
-
-                <button className='button-details' onClick={onClose}>Fechar</button>
-            </div>
-        </div>
-
-
-
-.modal-infos-details{
-    border: 1px solid green;
-}
-
-.button-details {
-    margin-top: 1rem;
-    padding: 0.5rem 1rem;
-    border: none;
-    border-radius: 5px;
-    background-color: #007BFF;
-    color: white;
-    cursor: pointer;
-}
-  
-.button-details:hover {
-    background-color: #0056b3;
-}

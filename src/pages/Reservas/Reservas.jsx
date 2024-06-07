@@ -20,6 +20,7 @@ const Reservas = () => {
     const [quantidade, setQuantidade] = useState(1)
     const [selectedHorarios, setSelectedHorarios] = useState([]);
     const { DataEscolhida, setSalaFilme, salaFilme } = useContext(CinemaContext)
+    const [idSala, setIdSala] = useState('')
     const [valor, setValor] = useState(10.00)
     const [dados, setDados] = useState([])
     const [loading, setLoading] = useState(true)
@@ -73,6 +74,7 @@ const Reservas = () => {
 
     function toggleModalSala(s){
         setSalaFilme(s.sala.nome_sala)
+        setIdSala(s.sala.id)
         //console.log(s)
         setSala(s)
         setModalOpen(true)
@@ -134,7 +136,8 @@ const Reservas = () => {
                     horario : selectedHorarios,
                     cadeiras : poltronas,
                     ingressos : quantidade,
-                    dia : DataEscolhida
+                    dia : DataEscolhida,
+                    id_sala : idSala
                 }
     
                 console.log(DATA)
@@ -226,8 +229,8 @@ const Reservas = () => {
                                 </p>
 
                                 <div className="form-group-res">
-                                    <label className='label-res' htmlFor="nome">Quantidade de Ingressos:</label>
-                                    <input type="number" id="nome" value={quantidade} onChange={(e) => setQuantidade(e.target.value)} />
+                                    <label className='label-res' htmlFor="qt">Quantidade de Ingressos:</label>
+                                    <input type="number" id="qt" value={quantidade} onChange={(e) => setQuantidade(e.target.value)} />
                                 </div>
 
                                 <div className="form-group-res">

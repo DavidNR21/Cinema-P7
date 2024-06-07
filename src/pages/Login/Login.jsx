@@ -85,6 +85,9 @@ const Login = () => {
 
     return (
         <div className='login-container'>
+            <div className='bt-return' onClick={() => navigation(`/`)}>
+                <i className='bx bx-left-arrow-alt' id='arrow-left'></i>
+            </div>
             <div className='show-container'>
                 <div className='background-show'>
                     <h2 className='show-title'>Bem-vindo</h2>
@@ -104,7 +107,7 @@ const Login = () => {
                             <label htmlFor="senha">Senha:</label>
                             <input type="password" id="senha" value={password} onChange={(e) => setPassword(e.target.value)} />
                         </div>
-                        <p className="recuperar-link">Esqueceu a senha? <Link to="/recuperar-senha">Clique aqui</Link></p>
+                        <p className="recuperar-link">Esqueceu a senha? <Link to="/Redefinir/login">Clique aqui</Link></p>
                         <button type="submit">{loading ? 'Carregando...' : 'Fazer Login'}</button>
                     </form>
                     <p className="cadastro-link">Ainda não possui uma conta? <Link to="/Cadastro">Crie aqui</Link></p>
