@@ -14,6 +14,7 @@ function Perfil (){
     const [isAdmin, setIsAdmin] = useState(false)
     const [DATA, setDATA] = useState({})
     const [ingressos, setIngressos] = useState([])
+    const [cinemas, setCinemas] = useState([])
     const navigation = useNavigate()
 
     const getUserData = () => {
@@ -51,10 +52,34 @@ function Perfil (){
                 )
             case 'adm':
                 return (
-                    <PainelAdmin dados={DATA}/>
+                    <PainelAdmin dados={cinemas} propi={username}/>
                 )
             default:
                 return null;
+        }
+    }
+
+    const GetCines =  async (n) => {
+        try {
+            const response = await fetch(`http://127.0.0.1:5000/cidades/admin/${n}`, {
+                method: 'GET',
+            });
+
+            if (!response.ok) {
+                throw new Error('Erro ao cadastrar usuário');
+            }
+
+            const data = await response.json();
+
+            setCinemas(data)
+
+            console.log(data)
+
+            return data;
+
+        } catch (error) {
+            console.error('Erro ao enviar requisição:', error);
+            throw error;
         }
     }
 
@@ -66,6 +91,7 @@ function Perfil (){
         setDATA(userData)
 
         ingressos_user(userData['nome'])
+        GetCines(userData['nome'])
     },[])
 
     return(

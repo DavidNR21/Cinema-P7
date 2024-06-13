@@ -21,6 +21,10 @@ function Cadastro() {
   const [proprietario, setProprietario] = useState(false);
   const navigation = useNavigate()
 
+  const saveUserData = (u) => {
+    localStorage.setItem('userData', JSON.stringify(u));
+  };
+
 
   const fetchUsuario = async (dados) => {
     if (senha.length < 6) {
@@ -54,6 +58,8 @@ function Cadastro() {
         setCidade('');
         setProprietario(false);
 
+        saveUserData(response.data)
+
         return data;
       } catch (error) {
         console.error('Erro ao enviar requisição:', error);
@@ -84,6 +90,7 @@ function Cadastro() {
       try {
         const response = await fetchUsuario(formData);
         console.log('Usuário cadastrado com sucesso:', response);
+        navigation('/')
 
       } catch (error) {
         console.error('Erro ao cadastrar usuário:', error);

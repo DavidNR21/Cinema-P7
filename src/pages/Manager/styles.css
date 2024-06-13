@@ -1,0 +1,121 @@
+
+/*  Manager Cine  */
+
+
+.manager-cine-container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.maneger-cine {
+    width: 700px;
+    height: 85%;
+    padding: 15px;
+    background-color: #f5f5f5;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+}
+
+.title-cine {
+    text-align: center;
+    font-size: 1.7rem;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+
+.but-div-cine {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-top: 30px;
+}
+
+
+.submit-button-cine {
+    width: 95%;
+    padding: 10px;
+    border: none;
+    border-radius: 6px;
+    background-color: #050505;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+  
+.submit-button-cine:hover {
+    background-color: #313131;
+}
+
+
+/*  Manager Sala  */
+
+
+.manager-cine-container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.maneger-sala {
+    width: 700px;
+    height: 90%;
+    padding: 15px;
+    background-color: #f5f5f5;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+}
+
+.title-sala {
+    text-align: center;
+    font-size: 1.7rem;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+
+.but-div-sala {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-top: 30px;
+}
+
+
+.submit-button-sala {
+    width: 95%;
+    padding: 10px;
+    border: none;
+    border-radius: 6px;
+    background-color: #050505;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+  
+.submit-button-sala:hover {
+    background-color: #313131;
+}
+
+
+/**/
+
+.div-propi {
+    width: 100%;
+    padding: 8px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+

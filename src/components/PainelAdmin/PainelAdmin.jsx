@@ -1,53 +1,39 @@
-
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify';
 import './styles.css'
-import ModalEdicao from '../ModalEdicao/ModalCine';
+import 'react-toastify/dist/ReactToastify.css';
 
 
-const PainelAdmin = ({ dados }) => {
+const PainelAdmin = ({ dados, propi }) => {
 
-    const [modalOpen, setModalOpen] = useState(false);
-    const [type, setType] = useState('')
-    const closeModal = () => setModalOpen(false);
-
-    const OpenModal = (t) => {
-        setType(t)
-        setModalOpen(true)
-    }
+    const navigation = useNavigate()
+    const [cines, setCines] = useState(dados)
 
 
-    const cines = [
-        {
-            "cinema_nome": "Cine-Guedes",
-            "nome_cidade": "Patos-PB",
-            "propietario" : "A",
-            "rua" : "Rua pedro firmino 1"
-        },
-        {
-            "cinema_nome": "Multicines",
-            "nome_cidade": "Patos-PB",
-            "propietario" : "B",
-            "rua" : "Rua pedro firmino 2"
-        },
-        {
-            "cinema_nome": "Multicines",
-            "nome_cidade": "Patos-PB",
-            "propietario" : "B",
-            "rua" : "Rua pedro firmino 2"
-        },
-        {
-            "cinema_nome": "Multicines",
-            "nome_cidade": "Patos-PB",
-            "propietario" : "B",
-            "rua" : "Rua pedro firmino 2"
-        },
-        {
-            "cinema_nome": "Multicines",
-            "nome_cidade": "Patos-PB",
-            "propietario" : "B",
-            "rua" : "Rua pedro firmino 2"
+    const DeleteCidade =  async (n) =>{
+        try {
+            const response = await fetch(`http://127.0.0.1:5000/cidades/delete/${n}`, {
+                method: 'DELETE',
+            });
+
+            if (!response.ok) {
+                throw new Error('Erro ao cadastrar');
+            }
+
+            const data = await response.json();
+
+            toast.success('Deletado cadastrado com sucesso!');
+
+            setCines(cines.filter(cinema => cinema.cinema_nome !== n))
+
+            return data;
+        } catch (error) {
+            console.error('Erro ao enviar requisição:', error);
+            toast.error('Erro ao Deletar');
+            throw error;
         }
-    ]
+    }
 
     return (
         <section id="adm">
@@ -63,7 +49,7 @@ const PainelAdmin = ({ dados }) => {
                             <p>Propietario: {ingresso.propietario}</p>
                         </div>
                         <div className="ingresso-actions">
-                            <button className="action-button">
+                            <button className="action-button" onClick={() => DeleteCidade(ingresso.cinema_nome)}>
                                 <i className="bx bxs-trash-alt" id='ingresso-icon'></i>
                             </button>
                         </div>
@@ -73,22 +59,26 @@ const PainelAdmin = ({ dados }) => {
 
                 <div className="adm-item-modals">
                     <div className='adm-modals'>
-                        <button className='button-details' onClick={() => OpenModal('Adicionar Cinema')}>
+                        <button className='button-details' onClick={() => navigation(`/Manager/cine/${propi}/criar`, {state: propi})}>
                             Adicionar Cinema
                         </button>
 
-                        <button className='button-details' onClick={() => OpenModal('Adicionar Filme')}>Adicionar Filme</button>
+                        <button className='button-details' onClick={() => navigation('/Manager/filme/criar')}>Adicionar Filme</button>
 
-                        <button className='button-details' onClick={() => OpenModal('Editar Filme')}>
+                        <button className='button-details' onClick={() => navigation('/Manager/filme/edit')}>
                             Editar Filme
                         </button>
 
-                        <button className='button-details' onClick={() => OpenModal('Editar Cinema')}>
+                        <button className='button-details' onClick={() => navigation(`/Manager/cine/${propi}/edit`)}>
                             Editar Cinema
                         </button>
+
+                        <button className='button-details' onClick={() => navigation(`/Manager/salas`)}>
+                            Adicionar Salas
+                        </button>
+
                     </div>
                 </div>
-                <ModalEdicao type={type} isOpen={modalOpen} onClose={closeModal} />
             </div>
         </section>
     )
