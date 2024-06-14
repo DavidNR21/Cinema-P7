@@ -14,18 +14,19 @@ def createCidades():
         nome = data['nome_cidade']
         cinema = data['cinema_nome']
         propietario = data['propietario']
+        rua = data['rua']
 
         
         Cidades.create(
             nome_cidade = nome,
             cinema_nome = cinema,
-            propietario = propietario
+            propietario = propietario,
+            rua = rua
         )
 
 
         response = {
-            "message": "Dados JSON recebidos e processados com sucesso",
-            "data": data
+            "message": "Dados JSON recebidos e processados com sucesso"
         }
 
 
@@ -46,6 +47,29 @@ def getCidades():
         cidades_dict = [model_to_dict(cidade) for cidade in cidades]
 
         return jsonify(cidades_dict), 200
+
+    except Exception as e:
+        error_message = {"error": str(e)}
+        print("Erro:", e)
+        return jsonify(error_message), 400
+
+
+@cidades_bp.route('/update/<string:cinema>', methods=['PUT']) # criar
+def updateCidades(cinema):
+    try:
+        data = request.get_json()
+
+        query = Cidades.update(**data).where(Cidades.cinema_nome == cinema)
+
+        query.execute()
+
+
+        response = {
+            "message": "Dados JSON recebidos e processados com sucesso"
+        }
+
+
+        return jsonify(response), 200
 
     except Exception as e:
         error_message = {"error": str(e)}
@@ -88,3 +112,41 @@ def getCinema_v2(regiao):
         print("Erro:", e)
         return jsonify(error_message), 400
 
+
+@cidades_bp.route('/delete/<string:nome>', methods=['DELETE'])
+def deleteCidade(nome):
+    try:
+        user_delete = Cidades.get(Cidades.cinema_nome == nome)
+
+        user_delete.delete_instance()
+
+        response = {
+            "message": f"Deletado com sucesso."
+        }
+
+        return jsonify(response), 200
+
+    except Usuarios.DoesNotExist:
+        error_message = {"error": f"Usuário com ID: {id} não encontrado."}
+        return jsonify(error_message), 404
+
+    except Exception as e:
+        error_message = {"error": str(e)}
+        print("Erro:", e)
+        return jsonify(error_message), 400
+
+
+@cidades_bp.route('/admin/<string:n>', methods=['GET'])
+def getCidadesAdmin(n):
+    try:
+
+        cinemas = Cidades().select().where(Cidades.propietario == n)
+
+        cinemas_dict = [model_to_dict(cinema) for cinema in cinemas]
+
+        return jsonify(cinemas_dict), 200
+
+    except Exception as e:
+        error_message = {"error": str(e)}
+        print("Erro:", e)
+        return jsonify(error_message), 400

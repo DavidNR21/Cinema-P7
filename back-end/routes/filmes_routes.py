@@ -23,13 +23,12 @@ def createFilme():
         Filmes.create(
             nome_filme = nome,
             imagem = img,
-            preco_ingresso = preco,
+            preco_ingresso = float(preco),
             horarios = horario,
             dub_leg = dublagem,
             duracao = duracao,
             cinema = cinema,
         )
-        #filme.save()
 
 
         response = {

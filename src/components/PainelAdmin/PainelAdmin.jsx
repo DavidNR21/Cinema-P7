@@ -49,6 +49,9 @@ const PainelAdmin = ({ dados, propi }) => {
                             <p>Propietario: {ingresso.propietario}</p>
                         </div>
                         <div className="ingresso-actions">
+                            <button className="action-button" onClick={() => navigation(`/Manager/cine/${propi}/edit`)}>
+                                <i className='bx bxs-pencil' id='ingresso-icon'></i>
+                            </button>
                             <button className="action-button" onClick={() => DeleteCidade(ingresso.cinema_nome)}>
                                 <i className="bx bxs-trash-alt" id='ingresso-icon'></i>
                             </button>
@@ -67,10 +70,6 @@ const PainelAdmin = ({ dados, propi }) => {
 
                         <button className='button-details' onClick={() => navigation('/Manager/filme/edit')}>
                             Editar Filme
-                        </button>
-
-                        <button className='button-details' onClick={() => navigation(`/Manager/cine/${propi}/edit`)}>
-                            Editar Cinema
                         </button>
 
                         <button className='button-details' onClick={() => navigation(`/Manager/salas`)}>
