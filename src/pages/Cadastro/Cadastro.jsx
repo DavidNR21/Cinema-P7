@@ -21,10 +21,6 @@ function Cadastro() {
   const [proprietario, setProprietario] = useState(false);
   const navigation = useNavigate()
 
-  const saveUserData = (u) => {
-    localStorage.setItem('userData', JSON.stringify(u));
-  };
-
 
   const fetchUsuario = async (dados) => {
     if (senha.length < 6) {
@@ -58,7 +54,6 @@ function Cadastro() {
         setCidade('');
         setProprietario(false);
 
-        saveUserData(response.data)
 
         return data;
       } catch (error) {
