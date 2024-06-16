@@ -101,7 +101,7 @@ function Manager() {
             </div>
             <div>
               <label className="label-cad" htmlFor="senha">Dublagem:</label>
-              <input type="password" id="senha" value={dublagem} onChange={(e) => setDublagem(e.target.value)} required />
+              <input type="text" id="senha" value={dublagem} onChange={(e) => setDublagem(e.target.value)} required />
             </div>
           </div>
 
