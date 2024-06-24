@@ -31,9 +31,6 @@ Cinema-uepb is an academic project not linked to UEPB, being an online ticket re
 7. Open `http://localhost:5173` in your browser
 
 
-# Live demo
-You can see a 5-minute live demo of this project [here](https://www.loom.com/share/c55801bd859d489b8cbe9b9da1e138da)
-
 # Screenshots
 > Main page
 ![Main page](src/assets/readme/main-page.png)
